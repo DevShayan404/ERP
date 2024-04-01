@@ -1,0 +1,204 @@
+::ng-deep .mat-mdc-dialog-container {
+    --mdc-dialog-container-color: #f1f5f8;
+  }
+
+.title {
+    padding: 20px 20px 0px 20px;
+    display: flex;
+    color: black;
+    /* justify-content: space-between; */
+    align-items: center;
+  }
+
+  .MainContent{
+    max-height: 90vh;
+  }
+
+  /* //////////////// */
+  
+
+  .child-card-title {
+    /* flex: 1; */
+    text-align: left;
+    font-size: 14px; /* Adjust font size as needed */
+    font-weight: 500; /* Adjust font weight as needed */
+    color: rgb(56, 54, 54);
+  }
+  
+  .heading {
+    /* border: 1px solid yellow; */
+    line-height: 15px;
+  }
+  .headingChild {
+    /* border: 1px solid; */
+    color: #818181;
+    font-size: 10px;
+    font-weight: 400;
+    margin-left: 18px;
+  }
+
+
+
+  /* ////////////Table */
+
+  .cardone{
+    height: 65vh;
+    overflow-y:auto;
+  }
+  .Step2Table{
+    width: 100%;
+  }
+  .tableNameStep2{
+    background-color: #673ab7;
+    color: white;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 10px 8px;
+    display: inline;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .activeStyle {
+    background-color: #38008a;
+    letter-spacing: 2px;
+  }
+  
+  /* .activeStyle  {
+    transform: translateY(-20px);
+  } */
+  
+  .TableCard{
+    max-height: 60vh;
+    overflow: auto;  
+  }
+  
+  .Step2Table tr td{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 10px;
+    color: black;
+    font-weight: 400;
+  
+     }
+     .Step2Table tr th{
+        text-align: center;
+        position: sticky;
+        background-color: #f0f2ff;
+        border-bottom:2px solid #4252ab;
+        color: rgb(34, 33, 33);
+        font-size: 10px;
+        font-weight: 500;
+        top: 0px;
+         }
+
+
+         .my-checkbox {
+            transform: scale(0.8);
+        }
+        
+        .my-checkbox .mat-ripple-element {
+            transform: translate(0, 0), scale3d(1, 1, 1);
+            left: 0 !important;
+            top: 0 !important;
+        }
+
+
+        .editTextfield{
+            width:180px;
+            padding: 0px;
+            display: flex;
+          
+          }
+       .editTextfield mat-select:focus{
+            outline:none;
+          }
+          
+          .editTextfield mat-select{
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+            background-color:#f1f5f8;
+            color: rgb(77, 77, 77);
+            padding: 8px 8px 8px 12px;
+            font-size: 12px;
+            width:180px;
+            height:36px;
+            caret-color:purple;
+            margin-left: 5px;
+          }
+
+
+          
+input.ng-invalid.ng-touched
+{
+    border: 1px solid rgb(255, 73, 73);
+    /* box-shadow: 0 0 20px rgb(253, 107, 107); */
+
+}
+
+
+input::placeholder {
+    font-size: 10px; 
+    color: #9f9f9f; 
+  }
+  input[type="text"],input[type="number"] {
+    font-size: 12px;
+    height: 36px;
+    
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+  }
+  .input-group-text {
+ padding: 0.1rem 0.75rem ;  
+  }
+
+  .form-control:focus {
+    border-color: rgb(203, 199, 255);
+    box-shadow: 0 0 0 0.2rem rgba(243, 201, 255, 0.25);
+} 
+  
+  .custom-placeholder {
+    font-size: 13px; 
+  }
+
+  .input-group button{
+    width: 80px;
+    color: rgb(77, 77, 77);
+    background-color:#f1f5f8;
+    font-size: 10px;
+    font-weight: 400;
+  }
+ 
+
+/* ////////////////////////////////////////////Second Div/////////////// */
+.main-header{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 70px;
+
+}
+.box{
+    height: 70px;
+    width: 70px;
+
+}
+
+.box:first-child{
+    margin-right: auto;
+}
+.box:last-child{
+    margin-left: auto;
+}
+
+.box:nth-child(2){
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 200px;
+   font-size: 14px;
+    font-weight: 500;
+    color: #767676;
+
+}

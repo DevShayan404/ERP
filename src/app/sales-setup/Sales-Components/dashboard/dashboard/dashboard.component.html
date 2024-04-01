@@ -1,0 +1,215 @@
+
+<div class="filterIcon">
+  <i data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="margin-right: 15px;font-size: 20px;" class="bi bi-funnel"></i>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header" style="margin-top: 60px;">
+    <span style="font-size: 14px;font-weight: 500;" id="offcanvasRightLabel">Filter Your Dashboard</span>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <mat-chip-set
+  class="example-chip">
+  <mat-chip
+    class="example-box"
+    cdkDrag
+    *ngFor="let vegetable of vegetables">
+    {{vegetable.name}}
+  </mat-chip>
+</mat-chip-set>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row g-2 justify-content-center" >
+    <div  class="col-lg-3 col-md-4 col-sm-6" (click)="selectStatusCard(i)" (click)="getStatusBuisness(item)"  *ngFor="let item of FollowUpList let i = index"  >
+      <div class="card1" [ngClass]="{ 'highlighted-main': i === selectedCardIndex }">
+      <div>
+        <div class="numbers">{{item.totalCount}}</div>
+        <div class="cardName"> {{item.statusName}}</div>
+      </div>
+      <div class="iconBx">
+        <ion-icon [name]=item.statusIcon></ion-icon>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+  
+
+  <div class="container" style="margin-top: 10px;">
+  <div class="row g-2 justify-content-center">
+
+    <div class="col-lg-2 col-md-3 col-sm-6" *ngFor="let business of businessList  let i = index">
+      <mat-card class="card" (click)="getBusinessTicketList(business.businessId,i)" [ngClass]="{ 'highlighted-Biz': i === selectedBizIndex }">
+        <div class="infos">
+            <div class="image"><img [src]="LogoUrl + business.businessLogo" (error)="handleImageError(business)"></div>
+            <div class="info">
+           
+                    <p class="name text-center" style="color: black;"  [ngStyle]="{'font-size.px': business.businessName.length > 5 ? 11 : 14}">
+                       {{business.businessName}}
+                    </p>
+            
+                <div class="stats ">
+                        <p class="flex flex-col">
+                           
+                            <span class="state-value">
+                               {{business.totalBiz}}
+                            </span>
+                        </p>
+                        
+                </div>
+            </div>
+        </div>
+
+          </mat-card>
+    </div>
+
+    
+  </div>
+</div>
+
+
+
+
+
+  <div class="details">
+    <div *ngIf="chart === true" style="display: flex;justify-content: space-between; gap: 10px;" class="chart">
+      <div style="border-right: 1px solid rgb(222, 222, 222);" echarts [options]="chartOption" class="demo-chart"></div>
+      <div echarts [options]="chartOption2" class="demo-chart"></div>
+    </div>
+
+    <div *ngIf="chart === false" class="recentOrders" >
+    <table>
+      <thead>
+        <tr >
+           <td>Person name</td>
+          <td>Business</td>
+          <td>Company name</td>
+         
+          <!-- <td>Phone</td> -->
+          <!-- <td>Expected Revenue</td> -->
+          <td>Email</td>
+          <td>CreatedBy</td>
+          <td>CreatedAt</td>
+          <td *ngIf="showProposalbtn == 106"><i class="bi bi-gear"></i></td>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="tableTr" *ngFor="let ticket of AllTickets; let i = index">
+          <td class="redirectPerson" (click)="redirectToLeadInfo(ticket)">{{ticket.personName}}</td>
+          <td>{{ticket.businessName}}</td>
+          <td>{{ticket.companyName}}</td>
+         
+          <!-- <td>{{ticket.phone}}</td> -->
+          <!-- <td>{{ticket.expectedRevenue}}</td> -->
+          <td>{{ticket.email}}</td>
+          <td>{{ticket.createdByName}}</td>
+          <td>{{ticket.createdAt | date}}</td>
+          <td>
+            <!-- matTooltip="Send Proposal" matTooltipPosition="left" -->
+            <div *ngIf="showProposalbtn == 106">
+            <i  [matMenuTriggerFor]="beforeMenu" style="cursor: pointer;"  class="bi bi-three-dots-vertical"></i>
+          
+<mat-menu  #beforeMenu="matMenu" xPosition="before">
+  <button (click)="proposalSetup(ticket ,i )" mat-menu-item><span  style="font-size: 12px;"><i class="bi bi-card-checklist"></i> Proposal Setup</span></button>
+  <button (click)="PreviewProposal(ticket)" mat-menu-item><span style="font-size: 12px;"><i class="bi bi-eye"></i> Proposal Preview</span></button>
+  <!-- <button mat-menu-item><span style="font-size: 12px;"><i class="bi bi-send-check"></i> Send Proposal</span></button> -->
+
+</mat-menu>
+</div>
+          </td>
+          
+        </tr>
+       
+      </tbody>
+    </table>
+    </div>
+
+
+    
+
+    <div class="recentCustomers">
+    <div class="cardHeader">
+      <div *ngIf="calenderShow == false">
+        <h2>Todays followup</h2>
+      </div>
+
+        <div *ngIf="calenderShow == true">
+     <mat-form-field class="dateRange">
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [formGroup]="dateRange" [rangePicker]="picker">
+      <input matStartDate formControlName="start" placeholder="Start date">
+      <input matEndDate formControlName="end" placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+    </div>
+
+      <div *ngIf="calenderShow == false"><i (click)="showCalender()" style="font-size: 20px;cursor: pointer;" class="bi bi-calendar2-week"></i></div>
+    
+  
+    </div>
+    <table>
+      <tr *ngFor="let item of GetRangeFollowUps">
+        <td width="60px"><div class="imgBx"><img src="/assets/checklist.png"></div></td>
+        <td style="display: flex;justify-content: space-between;"><div><h4 style="margin-bottom: 0px;">{{item.businessName}}<br><span>{{item.statusName}}</span></h4></div><div style="font-size: 8px;">{{item.createdAt | date}}</div></td>
+      </tr>
+
+      <tr *ngIf="!GetRangeFollowUps || GetRangeFollowUps.length == 0">
+        <td style="margin: 20px auto;text-align: center;" >
+         <span style="font-size: 14px; font-family:Verdana, Geneva, Tahoma, sans-serif;">no follow up for this range</span> 
+        </td>
+      </tr>
+    
+     
+      
+    </table>
+    </div>
+    
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="card1">
+      <div>
+        <div class="numbers">5M</div>
+        <div class="cardName"> Claims</div>
+      </div>
+      <div class="iconBx">
+        <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+      </div>
+    </div>
+   
+    <div class="card1">
+      <div>
+        <div class="numbers">500k</div>
+        <div class="cardName"> Sales</div>
+      </div>
+      <div class="iconBx">
+        <ion-icon name="ribbon-outline"></ion-icon>
+      </div>
+    </div>
+    <div class="card1">
+      <div>
+        <div class="numbers">284M</div>
+        <div class="cardName">Earning</div>
+      </div>
+      <div class="iconBx">
+        <ion-icon name="eye-outline"></ion-icon>
+      </div>
+    </div> -->
+
+    

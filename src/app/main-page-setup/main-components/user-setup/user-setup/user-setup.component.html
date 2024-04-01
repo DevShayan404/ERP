@@ -1,0 +1,441 @@
+<div class="container mt-3">
+  <div class="row justify-content-start gy-3">
+    <div class="Pagename">
+      <mat-icon>settings</mat-icon><span style="padding: 4px">User Management</span>
+    </div>
+
+     <!-- --All User -->
+
+    <div class="col-lg-3 col-md-4 col-sm-12 mt-3">
+
+      <mat-card class="cardone">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 15px;
+            top: 0;
+            position: sticky;
+            z-index: 1;
+            background-color: white;
+          "
+        >
+          <div style="font-weight: bold">User List</div>
+          <div
+            style="
+              font-size: 13px;
+              background-color: #f1f5f8;
+              color: rgb(46, 46, 197);
+              border-radius: 10px;
+              padding: 1px 6px;
+            "
+          >
+            <i class="bi bi-person"></i
+            ><span style="margin-left: 3px; font-size: 12px">{{
+              AllDataLength
+            }}</span>
+          </div>
+        </div>
+        <mat-card-content class="Getmat-card-content">
+          <mat-card style="margin-top: 3px" *ngFor="let data of AllUserData">
+            <mat-card-content class="Getmat-card-content">
+              <mat-card-header class="UserCard" (click)="EditUserDetail(data)">
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title style="font-size: 14px">{{
+                  data.userName
+                }}</mat-card-title>
+                <mat-card-subtitle style="font-size: 10px">{{
+                  data.userRole
+                }}</mat-card-subtitle>
+
+                <div style="margin-left: auto; margin-top: 0.7rem;">
+                  <i class="bi bi-chevron-right"></i>
+                </div>
+              </mat-card-header>
+            </mat-card-content>
+          </mat-card>
+   
+
+          <hr
+            style="
+              width: 90%;
+              margin-left: 5% !important;
+              margin-right: 5% !important;
+            "
+          />
+
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              gap: 10px;
+              cursor: pointer;
+              padding: 5px 0px 15px 0px;
+              bottom: 0;
+              position: sticky;
+              background-color: white;
+            "
+          >
+            <div (click)="Addbtn()" style="font-size: 1.8rem; color: #727577">
+              <i class="bi bi-plus-circle"></i>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+  
+    </div>
+
+  
+    <div *ngIf="showUSerProfile" class="col-lg-4 col-md-4 col-sm-12" >
+      <app-user-detailed-list>
+        <div class="closeCardBtn" (click)="closeUSerListCard()">
+          <i  class="bi bi-x"></i>
+          </div>
+
+          <button (click)="ShowAccSetupCard()" style="width: 100%;" mat-raised-button>Edit User</button>
+      </app-user-detailed-list>
+    </div>
+
+                            <!-- --Edit update User -->
+
+ <div *ngIf="showAccSetup" class="col-lg-5 col-md-4 col-sm-12">
+  <mat-card class="cardone">
+    <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 15px;
+      top: 0;
+      position: sticky;
+      z-index: 1;
+      background-color: white;
+    "
+  >
+
+  <div> 
+    <div style="font-weight: bold">Account Setup</div>
+    <div *ngIf="InserUpdate == 0" style="font-size: 10px; color: #727577;font-weight: 500;">Eidt and update user information</div>
+    <div *ngIf="InserUpdate == 1" style="font-size: 10px; color: #727577;font-weight: 500;">Add new user</div>
+
+
+</div>
+    
+    <div class="closeCardBtn" (click)="closeAccSetupCard()">
+    <i  class="bi bi-x"></i>
+
+    </div>
+  </div>
+  <hr
+  style="
+    width: 90%;
+    margin-left: 5% !important;
+    margin-right: 5% !important;
+    margin-top: 3px;
+    color: #727577;
+  "
+/>
+
+<mat-card-content style="padding: 2px 15px;">
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <!-- //Basic Information -->
+    <div class="accordion-item">
+      <div class="accordion-header">
+         
+          <div style="display: flex; justify-content: space-between;">
+            <div style="display: flex; align-items: center;">
+
+                <div ><i style="border: 0.01rem solid #727577;border-radius: 50%; padding: 5px 5px 4px 5px;" class="bi bi-file-person"></i>
+                </div>
+         
+            <div style="font-weight: 500;padding-left: 5px;">Required Information </div>
+            
+          </div>
+          <!-- <i class="bi bi-chevron-up"></i> -->
+          
+            <div (click)="checkAero('ToggleRequired')" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne"> <i *ngIf="toggleAero1 === true" class="bi bi-chevron-down"></i> <i *ngIf="toggleAero1 === false" class="bi bi-chevron-up"></i></div>
+          </div>
+  
+        </div>
+        <!-- show -->
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+        <div class="accordion-body">
+          <form [formGroup]="AddUserForm">
+          <table>
+           
+            <tr>
+              <td style="color: #727577;width: 35%;"><i class="bi bi-person"></i> Name</td>
+              <td class="editTextfield">
+            <input formControlName="userName"  type="text">
+            </td>
+          </tr>
+
+          <tr>
+            <td style="color: #727577;width: 35%;"><i class="bi bi-person"></i> Email</td>
+            <td class="editTextfield">
+          <input formControlName="userEmail"  type="text">
+          </td>
+        </tr>
+
+        <tr>
+          <td style="color: #727577;width: 35%;"><i class="bi bi-person"></i> Phone</td>
+          <td class="editTextfield">
+        <input formControlName="userPhone"  type="number">
+        </td>
+      </tr>
+
+
+          <tr>
+            <td style="color: #727577;width: 35%;"><i class="bi bi-person-gear"></i> Acc type</td>
+            <td class="editTextfield">
+
+              <mat-select formControlName="userRoleId" required>
+                <mat-option *ngFor="let role of RoleList" [value]="role.userRoleId">
+                  {{role.userRole}}
+                </mat-option>
+              </mat-select>
+          </td>
+          </tr>
+
+          <tr *ngIf="checkRole == '103'">
+            <td style="color: #727577;width: 35%;"><i class="bi bi-person-gear"></i> Manager</td>
+            <td class="editTextfield">
+              <mat-select  formControlName="reportingTo">
+                <mat-option *ngFor="let manager of ManagerList" [value]="manager.userId">
+                  {{manager.userName}}
+                </mat-option>
+              </mat-select>
+          </td>
+          </tr>
+
+          <tr *ngIf="checkRole == '104'">
+            <td style="color: #727577;width: 35%;"><i class="bi bi-person-gear"></i> Manager</td>
+            <td class="editTextfield">
+              <mat-select formControlName="parentReportingTo" >
+                <mat-option *ngFor="let manager of ManagerList" [value]="manager.userId">
+                  {{manager.userName}}
+                </mat-option>
+              </mat-select>
+          </td>
+          </tr>
+
+          <tr *ngIf="checkRole == '104'">
+            <td style="color: #727577;width: 35%;"><i class="bi bi-person-gear"></i> Team Lead</td>
+            <td class="editTextfield">
+              <mat-select formControlName="reportingTo" required>
+                <mat-option *ngFor="let lead of TeamleadList" [value]="lead.userId">
+                  {{lead.userName}}
+                </mat-option>
+              </mat-select>
+          </td>
+          </tr>
+
+
+          <tr>
+            <td style="color: #727577;width: 35%;"><i class="bi bi-person-badge"></i> Login Id</td>
+            <td class="editTextfield">
+          <input formControlName="userLoginId" type="text">
+          </td>
+        </tr>
+
+        <tr>
+          <td style="color: #727577;width: 35%;"><i class="bi bi-key"></i> Password</td>
+          <td class="editTextfield">
+        <input formControlName="userPassword" type="password">
+        </td>
+      </tr>
+   
+      <tr>
+        <td style="width: 35%;"> </td>
+        <td class="editTextfield">
+          <div class="btmBtn">
+            <button *ngIf="InserUpdate == 0" (click)="AddUser(0)" mat-raised-button color="basic">Update</button>
+            <button *ngIf="InserUpdate == 1" (click)="AddUser(1)" mat-raised-button color="basic">Add</button>
+          </div>
+      </td>
+    </tr>
+      
+
+          </table>
+        </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- //Department iNFORMATION -->
+    <div class="accordion-item">
+      <div class="accordion-header" >
+        <div style="display: flex; justify-content: space-between;">
+          <div style="display: flex; align-items: center;">
+
+            <div ><i style="border: 0.01rem solid #727577;border-radius: 50%; padding: 5px 5px 4px 5px;" class="bi bi-info-circle"></i> 
+            </div>
+     
+        <div style="font-weight: 500;padding-left: 5px;">Department Information </div>
+        
+      </div>
+          <div (click)="checkAero('optionalRequired')" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo"> <i *ngIf="toggleAero2 === true" class="bi bi-chevron-down"></i> <i *ngIf="toggleAero2 === false" class="bi bi-chevron-up"></i></div>
+        </div>
+      </div>
+      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          
+          
+          <app-department-setup (notifyParent)="AddUser($event)"></app-department-setup>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <div style="display: flex; justify-content: space-between;">
+          <div style="display: flex; align-items: center;">
+
+            <div ><i style="border: 0.01rem solid #727577;border-radius: 50%; padding: 5px 5px 4px 5px;" class="bi bi-gear"></i>
+            </div>
+     
+        <div style="font-weight: 500;padding-left: 5px;">Profile Customization</div>
+        
+      </div>
+          <div (click)="checkAero('ProfileRequired')" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree"> <i *ngIf="toggleAero3 === true" class="bi bi-chevron-down"></i> <i *ngIf="toggleAero3 === false" class="bi bi-chevron-up"></i></div>
+        </div>
+      </div>
+      <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </mat-card-content>
+    </mat-card>
+  </div>
+
+
+  
+
+  </div>
+</div>
+
+
+
+       <!-- <mat-card style="margin-top: 3px;">
+                        <mat-card-content>Simple card</mat-card-content>
+                      </mat-card>
+                      <mat-card style="margin-top: 3px;">
+                        <mat-card-content>Simple card</mat-card-content>
+                      </mat-card>
+                      <mat-card style="margin-top: 3px;">
+                        <mat-card-content>Simple card</mat-card-content>
+                      </mat-card> -->
+
+
+
+     <!-- --User Detail -->
+
+    <!-- <div class="col-lg-3 col-md-4 col-sm-6">
+      <mat-card>
+        <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 15px;
+        top: 0;
+        position: sticky;
+        z-index: 1;
+        background-color: white;
+      "
+    >
+      <div style="font-weight: bold">{{ userName}}</div>
+      <div
+        style="
+          font-size: 13px;
+          background-color: #f1f5f8;
+          color: rgb(46, 46, 197);
+          border-radius: 10px;
+          padding: 1px 6px;
+        "
+      >
+      <i class="bi bi-x"></i>
+ 
+      </div>
+    </div>
+ <div class="detailUserbtn">User Detail</div>
+ <mat-card-content>
+  <div class="UserDetails">
+  <div><i class="bi bi-person"></i> <span >{{ userName}}</span></div>
+  <div><i class="bi bi-person-gear"></i>  {{ userRole}}</div>
+  <div><i class="bi bi-person-badge"></i>  {{ userLoginId}}</div>
+  <div><i class="bi bi-key"></i>  {{ userPassword}}</div>
+</div>
+ </mat-card-content>
+      </mat-card>
+    </div> -->
+
+    <!-- --Add new User -->
+    <!-- <div class="col-lg-3 col-md-4 col-sm-6">
+    <mat-card>
+      <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 15px;
+        top: 0;
+        position: sticky;
+        z-index: 1;
+        background-color: white;
+      "
+    >
+      <div style="font-weight: bold">Add User</div>
+      <div
+        style="
+          font-size: 13px;
+          background-color: #f1f5f8;
+          color: rgb(46, 46, 197);
+          border-radius: 10px;
+          padding: 1px 6px;
+        "
+      >
+      <i class="bi bi-x"></i>
+ 
+      </div>
+    </div>
+      <mat-card-content class="Insertmat-card-content">
+        <form [formGroup]="AddUserForm">
+    
+        <mat-form-field class="form-field">
+          <mat-label>User name</mat-label>
+          <input matInput type="text" formControlName="userName" >
+        </mat-form-field>
+     
+        <mat-form-field class="form-field">
+          <mat-label>User role</mat-label>
+          <mat-select formControlName="userRoleId" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let role of RoleList" [value]="role.userRoleId">
+              {{role.userRole}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+          <mat-label>User login Id</mat-label>
+          <input matInput type="text" formControlName="userLoginId">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+          <mat-label>User password</mat-label>
+          <input matInput type="text" formControlName="userPassword">
+        </mat-form-field>
+
+        <div class="btmBtn">
+          <button (click)="AddUser()" mat-raised-button color="primary">Add</button>
+        </div>
+      
+     </form>
+     </mat-card-content>
+    </mat-card>
+</div> -->
+

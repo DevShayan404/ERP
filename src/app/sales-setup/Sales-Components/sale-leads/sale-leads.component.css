@@ -1,0 +1,96 @@
+.topbtn{
+display: flex;
+justify-content: flex-start;
+gap: 5px;
+}
+.box-header{
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.box-header i{
+font-size: 1.5rem;
+}
+.box-header i:hover{
+  cursor: pointer;
+  font-size: 1.7rem;
+  transition: 200ms ease-in;
+  background-color: rgb(189, 199, 208);
+  border-radius: 50%;
+  }
+
+/* Material UI */
+.form-field{
+  width: 100%;
+  height: 50px;
+  margin-bottom: 4px;
+}
+.Remarks{
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.Remarks textarea{
+  font-size: 12px;
+}
+.form-field-email{
+  width: 100%;
+  /* height: 60px; */
+}
+.Insertmat-card-content{
+  margin-top: 5px;
+ padding: 5px;
+}
+
+.Insertmat-card-content:first-child{
+  padding: 2px;
+}
+.Insertmat-card-content:last-child{
+  padding: 5px;
+}
+
+.Getmat-card-content{
+  padding: 0px;
+}
+.Getmat-card-content:first-child{
+  padding: 0px;
+}
+.Getmat-card-content:last-child{
+  padding: 0px;
+}
+mat-form-field input{
+  font-size: 12px;
+}
+mat-form-field mat-select{
+  font-size: 12px;
+}
+mat-icon{
+  font-size: 20px !important;
+}
+mat-label{
+  font-size: 12px;
+}
+
+
+
+.example-header-image {
+  background-image: url('https://img.freepik.com/premium-vector/3d-businessman-icon-vector-illustration_212216-834.jpg?w=740');
+  background-size: cover;
+}
+
+
+.cardone{
+  
+  height: 70vh;
+  overflow-y:auto;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c4c4c4;
+  border-radius: 0.3rem;
+}

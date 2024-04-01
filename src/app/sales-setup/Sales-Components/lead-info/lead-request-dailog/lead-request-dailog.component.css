@@ -1,0 +1,122 @@
+.MainContent {
+  height: 500px;
+  /* margin-top: 10px; */
+}
+
+.title {
+  padding: 20px 20px 0px 20px;
+  display: flex;
+  color: black;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+/* ///Basic info */
+.main-card {
+  padding: 15px;
+}
+.main-card-title {
+  flex: 1; /* This makes the title take up the remaining space on the left */
+  text-align: left;
+  font-size: 16px; /* Adjust font size as needed */
+  font-weight: 500; /* Adjust font weight as needed */
+  color: rgb(56, 54, 54);
+}
+
+.child-card {
+  padding: 15px;
+}
+.child-card-title {
+  flex: 1;
+  text-align: left;
+  font-size: 14px; /* Adjust font size as needed */
+  font-weight: 500; /* Adjust font weight as needed */
+  color: rgb(56, 54, 54);
+}
+
+.heading {
+  /* border: 1px solid yellow; */
+  line-height: 15px;
+}
+.headingChild {
+  /* border: 1px solid; */
+  color: #818181;
+  font-size: 10px;
+  font-weight: 400;
+  margin-left: 18px;
+}
+
+/* ///////////////INPUT FIELD/////////// */
+.border-bottom-input {
+  width: 65%;
+  color: #818181;
+  border: none;
+  border-bottom: 1px solid #000; /* Set the initial border color */
+  outline: none; /* Remove the default focus outline */
+  transition: border-color 0.9s; /* Add a transition to the border color change */
+}
+
+.border-bottom-input:focus {
+  border-bottom: 2px solid rgb(169, 48, 169);
+  color: black;
+}
+
+.BasicInfo-label {
+  text-wrap: nowrap;
+  font-size: 12px;
+}
+.inputLabelMain input[type="text"] {
+  font-size: 12px;
+}
+
+.inputLabelMain {
+  display: flex;
+  justify-content: space-between;
+}
+
+.AgentRemarks {
+  width: 100%;
+  height: 100%;
+}
+.AgentMain {
+  width: 100%;
+}
+
+.AgentRemarks textarea {
+  font-size: 10px;
+}
+
+/* //////// dublicate table ///////// */
+.TableCard {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.Step2Table tr td {
+  /* text-align: center; */
+  font-size: 10px;
+  color: black;
+  font-weight: 400;
+}
+.Step2Table tr th {
+  /* text-align: center; */
+  position: sticky;
+  background-color: #f0f2ff;
+  border-bottom: 2px solid #4252ab;
+  color: rgb(34, 33, 33);
+  font-size: 10px;
+  font-weight: 500;
+  top: 0px;
+}
+
+
+
+.tableNameStep2{
+    background-color: #673ab7;
+    color: white;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 10px 8px;
+    display: inline;
+    font-size: 12px;
+  }

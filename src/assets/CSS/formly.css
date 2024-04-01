@@ -1,0 +1,133 @@
+.form {
+    position: relative;
+      width: 100%;
+      height: 2.5rem;
+      margin-bottom: 15px;
+  }
+  .form .form__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+      height: 100%;
+      border: 1px solid  rgb(204, 204, 204);
+      border-radius: 0.3rem;
+      font-family: inherit;
+      font-size: inherit;
+      color: black;
+      outline: none;
+      padding: 1rem;
+      background: none;
+    z-index: 1;
+  }
+  .form .form__label{
+    position: absolute;
+    font-size: 1rem;
+    left: .5rem;
+    top: 0.3rem;
+    padding: 0 0.5rem;
+    color: rgb(142, 142, 142);
+    cursor: text;
+    transition: top 200ms ease-in
+    left 200ms ease-in
+    font-size 200ms ease-in;
+    background-color:white;
+    transition: 0.3s;
+  }
+  .form__input:focus + .form__label{
+    top: -.5rem;
+    left: .3rem;
+    color: #0275d8;
+    font-size: .9rem;
+    font-weight: 500;
+    z-index: 10;
+  }
+  .form__input:not(:placeholder-shown).form__input:not(:focus)+ .form__label{
+    top: -.5rem;
+    left: .3rem;
+    font-size: .9rem;
+    font-weight: 500;
+    z-index:10;
+  }
+  .form .form__input:focus{
+    border-color: #0275d8;
+  }
+
+  .formly-error{
+    font-size: 12px;
+    padding-top: 10px;
+    padding-left:10px;
+    color:red;
+  }
+
+
+  @media (max-width: 575.98px) { 
+
+    /* //////////////////////FORM input////////////////////////// */
+    .form {
+      position: relative;
+        width: 100%;
+        height: 2rem;
+        margin-bottom: 15px;
+    }
+    .form .form__input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+        height: 100%;
+        border: 1px solid  rgb(204, 204, 204);
+        border-radius: 0.3rem;
+        font-family: inherit;
+        font-size: 10px;
+        color: black;
+        outline: none;
+        padding: 1rem;
+        background: none;
+      z-index: 1;
+    }
+    .form .form__label{
+      position: absolute;
+      font-size: 1rem;
+      left: .5rem;
+      top: 0.3rem;
+      padding: 0 0.5rem;
+      color: rgb(142, 142, 142);
+      cursor: text;
+      transition: top 200ms ease-in
+      left 200ms ease-in
+      font-size 200ms ease-in;
+      background-color:white;
+      transition: 0.3s;
+    }
+    .form__input:focus + .form__label{
+      top: -.3rem;
+      left: .3rem;
+      color: #0275d8;
+      font-size: .5rem;
+      font-weight: 500;
+      z-index: 10;
+    }
+    .form__input:not(:placeholder-shown).form__input:not(:focus)+ .form__label{
+      top: -.3rem;
+      left: .3rem;
+      font-size: .5rem;
+      font-weight: 500;
+      z-index:10;
+    }
+    .form .form__input:focus{
+      border-color: #0275d8;
+    }
+
+  
+  .formly-error{
+    font-size: 10px;
+    padding-top: 10px;
+    padding-left:10px;
+    color:red;
+  }
+
+
+
+
+  }

@@ -1,0 +1,134 @@
+<!-- <mat-card class="custom-card">
+    <mat-card-title class="custom-card-title">Calling Data Advance Search</mat-card-title>
+    <mat-card-content class="custom-card-content">
+     
+    </mat-card-content>
+  </mat-card> -->
+
+
+  <mat-card class="Search-box" >
+    <mat-card-header style="padding:0px 0px 10px" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+      <mat-card-title class="custom-card-title">Calling Data Advance Search</mat-card-title>
+      <mat-chip-listbox style="margin-left: 10px; padding: 2px;">
+       
+        <mat-chip  *ngFor="let item of filterChipsArray">
+          <span style="font-size: 8px;">{{item?.name}}</span><span > | </span>
+          <span style="font-size: 8px;">{{item?.val}}</span>
+        </mat-chip>
+      </mat-chip-listbox>
+    </mat-card-header>
+    <mat-card-content id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+        <!-- (submit)="AddCustomer(AddCallForm)" -->
+        <form #AddCallForm="ngForm" >
+        <div class="row gy-2">
+      
+            
+        <div class="col-4">
+            <mat-form-field class="form-field">
+              <mat-label>Agent</mat-label>
+            <mat-select [(ngModel)]="Agent" name="Agent" (selectionChange)="onChangeAgent($event)" required>
+              <mat-option *ngFor="let list of AgentList" [value]="list">
+                {{list.agent}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          </div>
+
+          <div class="col-4">
+            <mat-form-field class="form-field">
+              <mat-label>Status</mat-label>
+            <mat-select [(ngModel)]="Status" name="Status" (selectionChange)="onChangeStatus($event)"  required>
+              <mat-option *ngFor="let list of AgentList" [value]="list">
+                {{list.agent}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          </div>
+
+          <div class="col-4">
+            <mat-form-field class="form-field">
+              <mat-label>Source</mat-label>
+            <mat-select [(ngModel)]="Source" name="Source" (selectionChange)="onChangeSource($event)"  required>
+              <mat-option *ngFor="let list of AgentList" [value]="list">
+                {{list.agent}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          </div>
+          
+
+        <div class="col-4" >
+            <div>
+                <mat-form-field class="form-field">
+                    <mat-label>Created from</mat-label>
+                    <input [(ngModel)]="ResetcreatedFrom" name="ResetcreatedFrom" matInput [matDatepicker]="picker1"  (dateChange)="DPcreateFrom($event)">
+                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                    <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>   
+            </div>
+            <div style="margin-top: 5px;">
+                <mat-form-field class="form-field">
+                    <mat-label>Created To</mat-label>
+                    <input [(ngModel)]="Resetcreatedto" name="Resetcreatedto" matInput [matDatepicker]="picker2"  (dateChange)="DPcreateTo($event)">
+                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                    <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>   
+            </div>
+                 
+        </div>
+
+        <div class="col-4" >
+            <div>
+                <mat-form-field class="form-field">
+                    <mat-label>Updated from</mat-label>
+                    <input [(ngModel)]="ResetupdateFrom" name="ResetupdateFrom" matInput [matDatepicker]="picker3" (dateChange)="DPUpdateFrom($event)">
+                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                    <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                  </mat-form-field>   
+            </div>
+            <div style="margin-top: 5px;">
+                <mat-form-field class="form-field">
+                    <mat-label>Updated To</mat-label>
+                    <input [(ngModel)]="ResetupdateTo" name="ResetupdateTo" matInput [matDatepicker]="picker4" (dateChange)="DPUpdateTo($event)">
+                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                    <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker #picker4></mat-datepicker>
+                  </mat-form-field>   
+            </div>
+                 
+        </div>
+
+          <div class="col-4" >
+            <div>
+                <mat-form-field class="form-field">
+                    <mat-label>Follow from</mat-label>
+                    <input [(ngModel)]="ResetFollowFrom" name="ResetFollowFrom" matInput [matDatepicker]="picker5" (dateChange)="DPFollowFrom($event)">
+                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                    <mat-datepicker-toggle matIconSuffix [for]="picker5"></mat-datepicker-toggle>
+                    <mat-datepicker #picker5></mat-datepicker>
+                  </mat-form-field>   
+            </div>
+            <div style="margin-top: 5px;">
+                <mat-form-field class="form-field">
+                    <mat-label>Follow to</mat-label>
+                    <input [(ngModel)]="ResetFollowTo" name="ResetFollowTo" matInput [matDatepicker]="picker6" (dateChange)="DPFollowTo($event)">
+                    <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                    <mat-datepicker-toggle matIconSuffix [for]="picker6"></mat-datepicker-toggle>
+                    <mat-datepicker #picker6></mat-datepicker>
+                  </mat-form-field>   
+            </div>
+                 
+        </div>
+        <div class="col-12"class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne"> <button style="width: 100%;" (click)="search()" mat-raised-button>Search</button></div>
+        <div class="col-12"class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne"> <button style="width: 100%;" type="submit" (click)="reset(AddCallForm)" mat-raised-button>reset</button></div>
+  
+      </div>
+    </form>
+
+
+    </mat-card-content>
+  </mat-card>
+  

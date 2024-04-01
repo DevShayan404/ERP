@@ -1,0 +1,20 @@
+p {
+    font-family: Lato;
+  }
+  
+  .main_content {
+    /* border: 1px solid black; */
+    width:100%; 
+    height: calc(100vh - 10vh); 
+    background: #f1f5f8;
+    overflow-y: auto;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #c4c4c4;
+    border-radius: 0.3rem;
+  }

@@ -1,0 +1,39 @@
+
+
+<div class="container mt-1" style="width: 90%;">
+ 
+    <div class="Pagename">
+      <mat-icon>next_week</mat-icon><span style="padding: 4px">Business Setup</span>
+    </div>
+    <div class="PageTitle">Complete the 4 step business setup to get a new business form</div>
+  
+    <mat-tab-group id="parent">
+      <mat-tab label="BUSINESS CONFIGURATOR"> 
+        <app-business-configurator></app-business-configurator>
+      </mat-tab>
+      <mat-tab label="TICKET CONFIGURATOR" > 
+        <app-ticket-configurator></app-ticket-configurator>
+      </mat-tab>
+      <mat-tab label="Third Party & Selling channel"> 
+        
+
+        <mat-tab-group style="background-color: white;" mat-stretch-tabs="false" mat-align-tabs="center">
+          <mat-tab label="Third Party Processor"> 
+            <app-third-party-configurator></app-third-party-configurator>
+            </mat-tab>
+            <mat-tab label="Selling Channel"> 
+              <app-selling-channel-configurator></app-selling-channel-configurator>
+            </mat-tab>
+            <mat-tab label="Entity"> 
+              <app-entity-configurator></app-entity-configurator>
+            </mat-tab>
+            </mat-tab-group>
+
+      </mat-tab>
+      <mat-tab label="Profile CONFIGURATOR"> 
+        <app-profile-configurator></app-profile-configurator>
+      </mat-tab>
+    </mat-tab-group>
+    
+
+  </div>

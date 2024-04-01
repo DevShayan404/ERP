@@ -1,0 +1,38 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+      padding: 6px 18px;
+      padding-left: 2px;
+      background: #fafafa;
+      color: black;
+    }
+  
+.shadow{
+box-shadow: 0px 35px 25px -8px rgba(0,0,0,0.1);
+position: relative;
+z-index: 10;
+}
+
+.vl {
+  border-left: 2px solid #e1e6ea;
+  height: 25px;
+  position: absolute;
+  top: 18px;
+  left: 2.7rem;
+}
+    .profile{
+display: flex;
+align-items: center;
+cursor: pointer;
+margin-right: 10px;
+    }
+
+   
+    .navName{
+cursor: pointer;
+    }
+
+    .matICon mat-icon{
+      font-size: 25px;
+      color: #8f8f8f;
+    }

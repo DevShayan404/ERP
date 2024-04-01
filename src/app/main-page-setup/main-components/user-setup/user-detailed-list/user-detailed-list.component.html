@@ -1,0 +1,222 @@
+<mat-card class="cardone" >
+
+  <div
+    style="
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 15px;
+      top: 0;
+      position: sticky;
+      z-index: 1;
+      background-color: white;
+    "
+  >
+    <div>
+      <div style="font-weight: bold">User Profile</div>
+      <div style="font-size: 10px; color: #727577; font-weight: 500">
+        Detailed information of user
+      </div>
+    </div>
+
+    <ng-content class="closeCardBtn"></ng-content>
+  </div>
+  <hr
+    style="
+      width: 90%;
+      margin-left: 5% !important;
+      margin-right: 5% !important;
+      margin-top: 3px;
+      color: #727577;
+    "
+  />
+
+  <mat-card-content style="height: 100%;display: flex;flex-direction: column;justify-content: space-between;">
+    <div>
+    <div class="page-content page-container" id="page-content">
+      <div class="padding">
+        <div class="card user-card-full">
+          <div class="row m-l-0 m-r-0">
+            <div class="col-sm-4 bg-c-lite-green user-profile">
+              <div class="card-block text-center text-white">
+                <div class="m-b-15">
+                  <img
+                    src="assets/user.png"
+                    class="img-radius"
+                    alt="User-Profile-Image"
+                  />
+                </div>
+                <div
+                  style="
+                    color: black;
+                    font-size: 11px;
+                    font-weight: 500;
+                    margin-top: 5px;
+                    margin-bottom: 0px;
+                  "
+                >
+                  {{ UserName }}
+                </div>
+                <div
+                  style="
+                    color: black;
+                    font-size: 10px;
+                    font-weight: 400;
+                    position: relative;
+                    top: -8px;
+                  "
+                >
+                  {{ UserRole }}
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="card-block">
+                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                <div class="row">
+                  <div class="col-sm-6" style="padding-right: 0px">
+                    <p class="m-b-10 f-w-600">Email</p>
+                    <h6 class="text-muted f-w-400">{{ UserEmail }}</h6>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Phone</p>
+                    <h6 class="text-muted f-w-400">{{ UserPhone }}</h6>
+                  </div>
+                </div>
+                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">
+                  department
+                </h6>
+                <div class="row">
+                  <div
+                    *ngIf="UserRole == 'Agent' || UserRole == 'Team Lead'"
+                    class="col-sm-6"
+                  >
+                    <p class="m-b-10 f-w-600">Manager</p>
+                    <h6 class="text-muted f-w-400">{{ UserManager }}</h6>
+                  </div>
+                  <div *ngIf="UserRole == 'Agent'" class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Team lead</p>
+                    <h6 class="text-muted f-w-400">{{ UserTeamLead }}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="UserRole == 'Manager' || UserRole == 'Team Lead'"
+      class="row justify-content-start gy-2"
+    >
+      <strong>Team Lead Hierarchy</strong>
+      <div
+        click
+        class="col-lg-12 col-md-12 col-sm-12"
+        *ngFor="let list of deatialList; let i = index"
+      >
+        <mat-card>
+          <div
+            (click)="toggleDropdown(i)"
+            style="
+              display: flex;
+              justify-content: space-between;
+              padding: 12px 15px;
+              top: 0;
+              position: sticky;
+              z-index: 1;
+              background-color: white;
+            "
+          >
+            <div style="font-weight: 500">{{ list.userName }}</div>
+            <div
+              style="
+                font-size: 13px;
+                background-color: #f1f5f8;
+                color: rgb(46, 46, 197);
+                border-radius: 10px;
+                padding: 1px 6px;
+              "
+            >
+              <!-- <i class="bi bi-person"></i> -->
+              <span style="margin-left: 3px; font-size: 12px">
+                {{ list.subordinates?.length || 0 }}
+              </span>
+            </div>
+          </div>
+
+          <mat-card-content
+            class="expandCollapseContent"
+            class="optionCard"
+            *ngIf="
+              hideShowDropdown[i] == undefined ? false : !hideShowDropdown[i]
+            "
+          >
+            <!-- <table class="table product">
+                <thead>
+                </thead>
+                <tbody>
+                  <tr class="DropdownMainclass" *ngFor="let option of list.subordinates">
+                    <td 
+                    >
+                      {{ option?.userName }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table> -->
+
+            <!-- <ul > -->
+            <hr style="margin: 0px" />
+            <div style="font-size: 14px; font-weight: 500; margin-top: 5px">
+              <i style="font-size: 16px" class="bi bi-people"></i> Agents
+            </div>
+
+            <!-- <div class="row" style="padding: 10px;" >                    
+                    <div  class="col-4" style="margin-bottom: 2px;" *ngFor="let option of list.subordinates">
+              
+                        <mat-card  style="font-size: 12px;padding-left: 5px;color: #727577;"> {{ option?.userName }}</mat-card>
+                    </div>
+                </div> -->
+
+            <mat-chip-listbox aria-label="Dog selection">
+              <mat-chip *ngFor="let option of list.subordinates">
+                <img matChipAvatar src="assets/agent.png" alt="A" />
+                {{ option?.userName }}
+              </mat-chip>
+            </mat-chip-listbox>
+
+            <!-- </ul> -->
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <mat-card style="height:30vh;" *ngIf="UserRole == 'Agent'" class="parent">
+      <div class="AssignBusiines">
+        <i class="bi bi-briefcase"></i> Assign Business
+      </div>
+      <div class="body">
+        <div *ngFor="let item of AllBusiness" class="tab-parent">
+          <div class="tab">
+            <img [src]="LogoUrl + item.logoUrl" (error)="handleImageError(item)" />
+          </div>
+          <div class="BusinessName">{{ item.business }}</div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+   
+    <div style="bottom: 0;position: sticky;  z-index: 1;">
+      <ng-content select="button"></ng-content>
+    </div>
+    
+    
+  </mat-card-content>
+
+
+
+  
+  
+  
+</mat-card>

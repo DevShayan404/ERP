@@ -1,0 +1,121 @@
+
+<div class="container">
+<mat-card class="main-card">
+    <mat-card-title class="main-card-title">Lead Followup</mat-card-title>
+
+    <!-- //Basic info// -->
+    <mat-card class="child-card">
+        <mat-card-title class="child-card-title">
+            <div class="heading"><div><i class="bi bi-person"></i>  Basic Information</div><div class="headingChild">basic information can be edit and update</div></div>
+        </mat-card-title>
+        <mat-card-content style="margin-top: 10px;">
+            <form [formGroup]="basicInfo">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="inputLabelMain">
+<label class="BasicInfo-label">Orgazination</label>
+<input  type="text" formControlName="companyName" id="custom-input" class="border-bottom-input" >
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="inputLabelMain">
+<label class="BasicInfo-label">Person name</label>
+<input type="text" formControlName="personName" id="custom-input" class="border-bottom-input" >
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="inputLabelMain">
+<label class="BasicInfo-label">Email Address</label>
+<input type="text" formControlName="email" id="custom-input" class="border-bottom-input" >
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="inputLabelMain">
+<label class="BasicInfo-label">Contact no</label>
+<input type="text" formControlName="mobile" id="custom-input" class="border-bottom-input" >
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="inputLabelMain">
+<label class="BasicInfo-label">Expected revenue</label>
+<input type="text" formControlName="expectedRevenue" id="custom-input" class="border-bottom-input" >
+                    </div>
+                </div>
+                <!-- <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="inputLabelMain">
+<label class="BasicInfo-label">Follow up status</label>
+<input type="text" formControlName="" id="custom-input" class="border-bottom-input" >
+                    </div>
+                </div> -->
+           
+            </div>
+        </form>
+        </mat-card-content>
+    </mat-card>
+
+
+    <!-- business -->
+    <mat-card class="child-card" style="margin-top: 10px;">
+        <mat-card-title class="child-card-title" style="display: flex;justify-content: space-between;">
+            <div class="heading"><div><i class="bi bi-briefcase"></i> Business Information</div><div class="headingChild">business information can be edit and update</div></div>
+ 
+            <div>
+                <button *ngIf="showBusinessList == false" (click)="ShowBusinessList()" mat-raised-button  >
+                    <mat-icon style="font-size: 18px;">add_box</mat-icon>Add Business
+                  </button>
+
+                <mat-form-field *ngIf="showBusinessList == true"   class="form-field">
+                    <mat-select placeholder="Add new business" (selectionChange)="AddBusinessNewBusiness($event.value)">
+                      <mat-option *ngFor="let val of BusinessList" [value]="val.businessId">
+                        {{val.business}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+          
+        </mat-card-title>
+        <mat-card-content>
+            <mat-tab-group  (selectedTabChange)="TabGroup($event)"  mat-stretch-tabs="false" mat-align-tabs="start">
+                <mat-tab  *ngFor="let biz of LeadInfoData; let index = index" [label]="biz.businessName" >
+                    <mat-card class="child-card">
+                        <form [formGroup]="form">
+                            <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+                          </form>
+                      </mat-card>
+                  </mat-tab>
+              </mat-tab-group>
+
+            
+        </mat-card-content>
+        <div style="display: flex;gap: 5px;margin: 5px 10px 0px 10px;">
+            <button (click)="remaks()" style="width: 100%;" mat-raised-button>Remarks</button>
+            <button (click)="attachments()" style="width: 100%;" mat-raised-button>Attachments</button>
+        </div>
+    </mat-card>
+
+    <!-- remarks -->
+    <mat-card *ngIf="ShowRemarks == true" class="child-card" style="margin-top: 10px;">
+        <mat-card-title class="child-card-title">
+            <div class="heading"><div><i class="bi bi-chat-right-text"></i> {{businessName}} Remarks</div><div class="headingChild">Remarks can not be edit or update </div></div>
+        </mat-card-title>
+        <mat-card-content style="margin-top: 10px;">
+            <app-lead-info-remrks></app-lead-info-remrks>
+        </mat-card-content>
+    </mat-card>
+
+    <!-- Attachments -->
+    <mat-card *ngIf="ShowAttachments == true" class="child-card" style="margin-top: 10px;">
+        <mat-card-title class="child-card-title">
+            <div class="heading"><div><i class="bi bi-paperclip"></i>  Attachments</div><div class="headingChild">Attachments can not be edit or update </div></div>
+        </mat-card-title>
+        <mat-card-content  style="margin-top: 10px;">
+            <app-lead-info-attachments ></app-lead-info-attachments>
+        </mat-card-content>
+    </mat-card>
+  
+    
+</mat-card>
+</div>
+
+
+

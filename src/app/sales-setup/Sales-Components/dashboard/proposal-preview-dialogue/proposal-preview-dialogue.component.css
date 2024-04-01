@@ -1,0 +1,70 @@
+::ng-deep .mat-mdc-dialog-container {
+    --mdc-dialog-container-color: #f1f5f8;
+  }
+
+  .title {
+    padding: 20px 20px 0px 20px;
+    display: flex;
+    color: black;
+    /* justify-content: space-between; */
+    align-items: center;
+  }
+
+  .MainContent{
+    max-height: 90vh;
+  }
+
+  .main-header{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 70px;
+
+}
+.box{
+    height: 70px;
+    width: 70px;
+
+}
+
+.box:first-child{
+    margin-right: auto;
+}
+.box:last-child{
+    margin-left: auto;
+}
+
+.box:nth-child(2){
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 200px;
+   font-size: 14px;
+    font-weight: 500;
+    color: #767676;
+
+}
+
+.TableCard{
+    max-height: 60vh;
+    overflow: auto;  
+  }
+  
+  .Step2Table tr td{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 10px;
+    color: black;
+    font-weight: 400;
+  
+     }
+     .Step2Table tr th{
+        text-align: center;
+        position: sticky;
+        background-color: #f0f2ff;
+        border-bottom:2px solid #4252ab;
+        color: rgb(34, 33, 33);
+        font-size: 10px;
+        font-weight: 500;
+        top: 0px;
+         }

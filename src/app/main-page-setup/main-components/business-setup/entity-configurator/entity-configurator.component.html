@@ -1,0 +1,225 @@
+<div class="container">
+    <div class="row">
+    <div class="col-3">
+        <mat-card class="cardone">
+            <mat-card-content class="Insertmat-card-content">
+              <div style="background-color: #f1f3ff; border: 1px solid #d1d9ff;">
+                <div style="padding:10px;line-height: 16px;"> <div style="font-size: 14px;font-weight:500 ;color: rgba(0, 0, 0, 0.6);">Add new Entity</div>
+                <div style="font-size: 10px;font-weight:400;color: rgb(116, 116, 116);">To add new Entity first select business</div>
+              </div>
+              </div>
+                     
+                <div>
+                    <mat-form-field (click)="refreshBusiness()" class="form-field">
+                      <mat-label>Select business</mat-label>
+                    <mat-select (selectionChange)="onChangeBusiness($event)" required>
+                      <mat-option *ngFor="let list of BusinessList" [value]="list">
+                        {{list.business}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  </div>
+                <form [formGroup]="EntityForm" (ngSubmit)="AddForm(EntityForm)">
+              <div>
+              <mat-form-field class="form-field">
+                <mat-label>Entity name</mat-label>
+                <input matInput type="text" formControlName="entityName" >
+              </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="form-field">
+                  <mat-label>Description</mat-label>
+                  <input matInput type="text" formControlName="entityShortDesc" >
+                </mat-form-field>
+              </div>
+  
+              <div>
+                <mat-form-field class="form-field">
+                  <mat-label>Select Type</mat-label>
+                <mat-select formControlName="entityType" (selectionChange)="onChangeType($event)" required>
+                  <mat-option *ngFor="let type of AllTypes" [value]="type">
+                    {{type.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </div>
+
+              <div *ngIf="GetTypeForm === 'Product'" >
+              <div  formArrayName="Product" *ngFor="let frmCtrl of ProductFrmArr.controls; index as i" >
+                <div [formGroupName]="i">
+                    <div>
+                        <mat-form-field class="form-field">
+                          <mat-label>Rental Fee Min</mat-label>
+                          <input matInput type="text" formControlName="rentalFeeMin" >
+                        </mat-form-field>
+                      </div>
+                      <div>
+                        <mat-form-field class="form-field">
+                          <mat-label>Rental Fee Max</mat-label>
+                          <input matInput type="text" formControlName="rentalFeeMax" >
+                        </mat-form-field>
+                      </div>
+                      <div>
+                        <mat-form-field class="form-field">
+                          <mat-label>Purchasing Amount Min</mat-label>
+                          <input matInput type="text" formControlName="purchasingAmountMin" >
+                        </mat-form-field>
+                      </div>
+                      <div>
+                        <mat-form-field class="form-field">
+                          <mat-label>Purchasing Amount Max</mat-label>
+                          <input matInput type="text" formControlName="purchasingAmountMax" >
+                        </mat-form-field>
+                      </div>
+              
+            </div>
+            </div>
+        </div>
+
+        <div *ngIf="GetTypeForm === 'Service'" >
+            <div  formArrayName="Service" *ngFor="let frmCtrl of ServiceFrmArr.controls; index as i" >
+              <div [formGroupName]="i">
+                  <div>
+                      <mat-form-field class="form-field">
+                        <mat-label>monthly Fee Min</mat-label>
+                        <input matInput type="text" formControlName="monthlyFeeMin" >
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <mat-form-field class="form-field">
+                        <mat-label>monthly Fee Max</mat-label>
+                        <input matInput type="text" formControlName="monthlyFeeMax" >
+                      </mat-form-field>
+                    </div>
+                   
+            
+          </div>
+          </div>
+      </div>
+
+      <div *ngIf="GetTypeForm === 'Extra'">
+        <div  formArrayName="Extra" *ngFor="let frmCtrl of ExtraFrmArr.controls; index as i" >
+          <div [formGroupName]="i">
+              <div>
+                  <mat-form-field class="form-field">
+                    <mat-label>monthly Fee Min</mat-label>
+                    <input matInput type="text" formControlName="monthlyExtraFeeMin" >
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field class="form-field">
+                    <mat-label>monthly Fee Max</mat-label>
+                    <input matInput type="text" formControlName="monthlyExtraFeeMax" >
+                  </mat-form-field>
+                </div>
+               
+        
+      </div>
+      </div>
+  </div>
+      
+              <div>
+                <button [disabled]="!EntityForm.valid" type="submit" style="width: 100%;font-size: 10px;margin-top: 5px;" mat-stroked-button color="primary" ><i class="bi bi-plus-circle"></i> Add Processor</button>
+              </div>
+           </form>
+           </mat-card-content>
+          </mat-card>
+    </div>
+  
+    <div class="col-9">
+        <mat-card class="cardone" style="padding: 5px 10px;">
+
+            <div *ngIf="!EntityLength" class="searchLogo">
+              <img matTooltip="Select business to view records" matTooltipPosition="below" src="assets/setupSearch.jpg" alt="serach data">
+            </div>
+        <div *ngIf="EntityLength > 0">
+          <div style="background-color: #f1f3ff; border: 1px solid #d1d9ff;;
+          margin-top: 5px;
+          margin-bottom: 8px;">
+  
+            <div style="padding-left: 5px;margin-bottom: 10px;line-height: 16px;margin-top: 10px;"> 
+              <div style="font-size: 14px;font-weight:500 ;color: rgba(0, 0, 0, 0.6);">Entity Records</div>
+          <div style="font-size: 10px;font-weight:400;color: rgb(116, 116, 116);">Below all previous record you added</div>
+      </div>
+          </div>
+          
+            <div (click)="AllRecord('All')" class="tableNameStep2">
+              {{BizName}} <span style="background-color: white;
+              padding: 2px 9px;
+              color: black;
+              font-size: 10px;
+              border-radius: 4px;
+              position: relative;
+            bottom: 2px ">{{EntityLength}}</span>
+            </div>
+            <div (click)="AllProduct('Product')" class="tableNameStep2" style="margin-left: 5px;">
+                Product <span style="background-color: white;
+                padding: 2px 9px;
+                color: black;
+                font-size: 10px;
+                border-radius: 4px;
+                position: relative;
+              bottom: 2px ">{{productArray?.length}}</span>
+              </div> 
+               <div (click)="AllService('Service')" class="tableNameStep2" style="margin-left: 5px;">
+                Service <span style="background-color: white;
+                padding: 2px 9px;
+                color: black;
+                font-size: 10px;
+                border-radius: 4px;
+                position: relative;
+              bottom: 2px ">{{serviceArray?.length}}</span>
+              </div> 
+               <div (click)="AllExtra('Extra')" class="tableNameStep2" style="margin-left: 5px;">
+                Extra <span style="background-color: white;
+                padding: 2px 9px;
+                color: black;
+                font-size: 10px;
+                border-radius: 4px;
+                position: relative;
+              bottom: 2px ">{{extraArray?.length}}</span>
+              </div>
+            <mat-card class="TableCard">
+              
+            <table class="table table-response Step2Table">
+                <thead class="thead">
+                    <tr class="clientTableHead">
+                        <th>Entity type</th>
+                        <th>Entity name</th>
+                        <th>Entity desc</th>
+                        <th *ngIf="ShowhideColumn == 'Product' || ShowhideColumn == 'All'" >Rentail fee min</th>
+                        <th *ngIf="ShowhideColumn == 'Product' || ShowhideColumn == 'All'">Rentail fee max</th>
+                        <th *ngIf="ShowhideColumn == 'Product' || ShowhideColumn == 'All'">Purchasing amount Min</th>
+                        <th *ngIf="ShowhideColumn == 'Product' || ShowhideColumn == 'All'">Purchasing Amount Max</th>
+                        <th *ngIf="ShowhideColumn == 'Service' || ShowhideColumn == 'All'">Monthly fee min</th>
+                        <th *ngIf="ShowhideColumn == 'Service' || ShowhideColumn == 'All'">Monthly fee max</th>
+                        <th *ngIf="ShowhideColumn == 'Extra' || ShowhideColumn == 'All'">Monthly extra fee min</th>
+                        <th *ngIf="ShowhideColumn == 'Extra' || ShowhideColumn == 'All'">Monthly extra fee max</th>
+                        <th><i class="bi bi-three-dots-vertical"></i></th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <tr class="clientTableRow" *ngFor = "let item of AllEntityRecord">
+          <td>{{item.entityType}}</td>
+          <td>{{item.entityName}}</td>
+          <td>{{item.entityShortDesc}}</td>
+          <td *ngIf="ShowhideColumn == 'Product' || ShowhideColumn == 'All'">{{item.rentalFeeMin}}</td>
+          <td *ngIf="ShowhideColumn == 'Product' || ShowhideColumn == 'All'">{{item.rentalFeeMax}}</td>
+          <td *ngIf="ShowhideColumn == 'Product' || ShowhideColumn == 'All'">{{item.purchasingAmountMin}}</td>
+          <td *ngIf="ShowhideColumn == 'Product' || ShowhideColumn == 'All'">{{item.purchasingAmountMax}}</td>
+          <td *ngIf="ShowhideColumn == 'Service' || ShowhideColumn == 'All'">{{item.monthlyFeeMin}}</td>
+          <td *ngIf="ShowhideColumn == 'Service' || ShowhideColumn == 'All'">{{item.monthlyFeeMax}}</td>
+          <td *ngIf="ShowhideColumn == 'Extra' || ShowhideColumn == 'All'">{{item.monthlyExtraFeeMin}}</td>
+          <td *ngIf="ShowhideColumn == 'Extra' || ShowhideColumn == 'All'">{{item.monthlyExtraFeeMax}}</td>
+          <td><i style="color: red;cursor: pointer;" (click)="removeItem(item.id)"  class="bi bi-trash3"></i></td>
+          
+                    </tr>
+                </tbody>
+          
+            </table>
+            </mat-card>
+          </div>
+        </mat-card>
+    </div>
+    </div>
+    </div>

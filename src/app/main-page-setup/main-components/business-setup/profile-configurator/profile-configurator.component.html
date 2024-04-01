@@ -1,0 +1,235 @@
+  
+  <div style="max-width: 100%;">
+    <mat-stepper #stepper [linear]="isLinear" 
+      class="example-stepper"
+      [orientation]="(stepperOrientation | async)!">
+      <!-- ////Business Name.    step 1  / // -->
+      <mat-step [stepControl]="BusinessForm" [label]=busienssLabel [editable]="isEditable">
+        <div style="display: flex;justify-content: space-between; align-items: center;">
+  <div> <div style="font-size: 16px;font-weight:500 ;margin-top: 15px;">Profile Business Name</div>
+  <div style="font-size: 10px;font-weight:500;color: rgb(116, 116, 116);">Once added business name could not be change again after this step</div></div>
+  <!-- <div><button (click)="AddNewBusinessbtn()" mat-raised-button>{{BusnessBtnName}}</button></div> -->
+        </div>
+       
+    <form [formGroup]="BusinessForm" style="margin-top: 20px;">
+      <mat-form-field (click)="refreshBusiness()" *ngIf="ShowNewBusinessField ==false" class="form-field2">
+        <mat-label>Business name</mat-label>
+        <mat-select formControlName="businessId">
+          <mat-option *ngFor="let option of BusinessList" [value]="option.businessId">
+            {{option.business}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <!-- <mat-form-field *ngIf="ShowNewBusinessField == true" class="form-field2">
+        <mat-label>Add new business</mat-label>
+        <input formControlName="business" matInput>
+      </mat-form-field> -->
+        
+        </form>
+      <div class="BottomBtns">    
+        <!-- <div class="matIcon"><mat-icon>chevron_left</mat-icon></div> -->
+     <div class="submitBusinessbtn" ><button *ngIf="ShowNewBusinessField ==false" matStepperNext [disabled]="" (click)="SubmitBusiness()">Next</button><button *ngIf="ShowNewBusinessField ==true"  (click)="InsertNewBusiness()">Add business</button></div>
+        <!-- <button class="matIcon"  matStepperNext><mat-icon >chevron_right</mat-icon></button> -->
+  </div>
+  
+      </mat-step>
+      <!-- ////Business Name END/// -->
+  
+      <!-- Business Fields add   step 2 -->
+      <!-- [stepControl]="FieldsForm" -->
+      <!-- [editable]="isEditable" -->
+      <mat-step state="form"  label="Profile fields"  >
+        <div style="font-size: 16px;font-weight:500 ;margin-top: 15px;">Profile Fields</div>
+        <div style="font-size: 10px;font-weight:500;color: rgb(116, 116, 116);">Insert name and select dataType of each field(Dropdown options are in next step)</div>
+        <form [formGroup]="FieldsForm" style="margin-top: 20px;">
+  
+          <div class="row justify-content-center">
+  <div class="col-6">
+    <mat-form-field class="form-field2">
+      <mat-label>Field Name</mat-label>
+      <input formControlName="fieldName" matInput placeholder="Ex. Existing processor, Debit rate">
+    </mat-form-field>
+  </div>
+  <div class="col-6">
+    <mat-form-field class="form-field2">
+      <mat-label>Field type</mat-label>
+      <mat-select formControlName="fieldType" >
+        <mat-option *ngFor="let option of DataTypes" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  
+  <div class="col-6">
+    <button style="width: 100%;" mat-raised-button (click)="addItem()">Add Fields</button> &nbsp;
+    </div>
+    <div class="col-6">
+    <button style="width: 100%;" mat-raised-button  (click)="reset()">Reset Fields</button>
+  
+  </div>
+  
+  
+  <div *ngIf="listData.length>0" class="col-12">
+    <div class="tableNameStep2">
+      Fields List <span style="background-color: white;
+      padding: 2px 9px;
+      color: black;
+      font-size: 10px;
+      border-radius: 4px;
+      position: relative;
+    bottom: 2px ">{{listData.length}}</span>
+    </div>
+    <mat-card class="TableCard">
+      
+    <table class="table table-response Step2Table">
+        <thead class="thead">
+            <tr class="clientTableHead">
+                <th>Field name</th>
+                <th>Field type </th>   
+                
+                <th><i class="bi bi-three-dots-vertical"></i></th>
+            </tr> 
+        </thead>
+        <tbody>
+            <tr class="clientTableRow" *ngFor = "let item of listData">
+  <td><span>{{item.fieldName}}</span></td>
+  <td><span>{{item.fieldType}} <i *ngIf="item.fieldType == 'Dropdown list'" matTooltip="You can add list of dropdown in the next tab click on Done below" matTooltipPosition="above" class="bi bi-info-circle"></i></span></td>
+  <td><i style="color: red;cursor: pointer;" (click)="removeItem(item)"  class="bi bi-trash3"></i></td>
+  
+            </tr>
+        </tbody>
+  
+    </table>
+    </mat-card>
+  </div>
+        </div>
+        </form>
+        <div class="BottomBtns" style="margin-top: 20px;">    
+          <!-- <button class="matIcon" matStepperPrevious><mat-icon>chevron_left</mat-icon></button> -->
+       <div class="submitBusinessbtn"><button matStepperNext (click)="AddFieldObj()">Done</button></div>
+          <!-- <button class="matIcon" matStepperNext><mat-icon >chevron_right</mat-icon></button> -->
+    </div>
+      </mat-step>
+      <!-- Business Fields add end -->
+  
+  
+      <!-- //Dropdownz Option list    step 3/ -->
+      <mat-step  label="Profile dropdown options" [editable]="isEditable">
+        <div style="font-size: 16px;font-weight:500 ;margin-top: 15px;">DropDown Fields</div>
+        <div style="font-size: 10px;font-weight:500;color: rgb(116, 116, 116);">Insert dropdown options one by one</div>
+        
+        <div class="row justify-content-start gy-2" >
+  <div click class="col-lg-4 col-md-6 col-sm-12" *ngFor="let list of finalDropdownList; let i = index">
+    <mat-card >
+      <div (click)="toggleDropdown(i)" 
+      style="
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 15px;
+        top: 0;
+        position: sticky;
+        z-index: 1;
+        background-color: white;
+      "
+    >
+      <div style="font-weight:500">{{ list.fieldName }}</div>
+      <div
+        style="
+          font-size: 13px;
+          background-color: #f1f5f8;
+          color: rgb(46, 46, 197);
+          border-radius: 10px;
+          padding: 1px 6px;
+        "
+      >
+        <!-- <i class="bi bi-person"></i> -->
+        <span style="margin-left: 3px; font-size: 12px">
+         {{list.options?.length}}
+      </span>
+      </div>
+    </div>
+      <mat-card-content  class="expandCollapseContent" class="optionCard"
+      *ngIf="
+        hideShowDropdown[i] == undefined
+          ? false
+          : !hideShowDropdown[i]
+      ">
+      <form [formGroup]="optionsForm" (ngSubmit)="addOptions(list.fieldName)">
+        <div class="AddTextfield">
+          <input formControlName="name" required type="text">
+          <i (click)="addOptions(list.fieldName)" class="bi bi-plus-circle"></i>
+        </div>
+  </form>
+        <table class="table product">
+          <thead>
+            <tr>
+              <th>
+          
+              </th>
+              <th>
+               
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- *ngFor="let option of car.options" -->
+            <tr class="DropdownMainclass" *ngFor="let option of list.options; let i = index">
+              <td
+              >
+                {{ option.name }}
+              </td>
+              <td class="editdeltebtns">
+                <span>
+                  <!-- <i style="padding-right: 5px;" class="bi bi-pencil"></i> -->
+                  <i class="bi bi-trash3" (click)="removeOption(option,list.fieldName)"></i>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+       
+      </mat-card-content>
+      <div  *ngIf="
+      hideShowDropdown[i] == undefined
+        ? false
+        : !hideShowDropdown[i]
+    " style="bottom: 0;position: sticky;z-index: 1;">
+        <!-- <button (click)="UpdateOptionList(list.fieldName)" style="width: 100%;font-size: 12px;" mat-raised-button>UPDATE</button> -->
+      </div>
+    </mat-card>
+  </div>
+        </div>
+       
+  
+        <div class="BottomBtns" style="margin-top: 20px;">    
+          <button class="matIcon" matStepperPrevious><mat-icon>chevron_left</mat-icon></button>
+       <div class="submitBusinessbtn"><button matStepperNext (click)="InsertOptionsObj()">Submit</button></div>
+          <!-- <button class="matIcon" matStepperNext><mat-icon >chevron_right</mat-icon></button> -->
+    </div>
+      </mat-step>
+  
+      <!-- //Dropdownz Option list End/ -->
+  
+  <!-- ////////////////////////////////////////////////////////////////// -->
+  
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <div class="PageDone">
+          <h3>You are now done.</h3>
+        </div>
+        
+        <div>
+          <!-- <button mat-button matStepperPrevious>Back</button> -->
+          <button style="width: 100%;"  mat-raised-button (click)="ResetAllArrays()" (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+  
+      
+    </mat-stepper>
+  
+  <!-- </div> -->
+  </div>
+  

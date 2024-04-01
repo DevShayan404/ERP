@@ -1,0 +1,45 @@
+<!-- <div class="shadow"> -->
+    <div
+   
+    class="header container-fluid"
+  >
+  <div style="display: flex;align-items: center;">
+    <!-- <span style="cursor: pointer;" (click)="backToMain()"><span style="font-size: 35px; ">M</span>BE ERP</span> -->
+    <img  style="cursor: pointer;" (click)="backToMain()" height="80px" width="200" src="/assets/logombe.png" alt="">
+    <span class="spacer"></span>
+  </div>
+
+  
+  <div style="margin-top: 10px;">
+    <div style="display: flex; align-items: center;">
+      <span style="font-style: 16px;font-weight: 500;color: purple;"><span style="color: purple;">Hello</span>, {{userName}}</span> 
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+     <mat-icon>settings</mat-icon>
+   </button>
+    </div>
+  
+<mat-menu #menu="matMenu">
+  <button mat-menu-item disabled="true">
+    <mat-icon>person</mat-icon>
+    <span>Profile</span>
+  </button>
+  <button *ngIf="userRole!='Agent'"  routerLink="BusienssSetup" mat-menu-item>
+    <mat-icon>settings_applications</mat-icon>
+    <span>Business Setup</span>
+  </button>
+  <button *ngIf="userRole!='Agent'"  routerLink="UserSetup" mat-menu-item>
+    <mat-icon>manage_accounts</mat-icon>
+    <span>User Setup</span>
+  </button>
+  <button (click)="logout()" mat-menu-item>
+    <mat-icon>logout</mat-icon>
+    <span>logout</span>
+  </button>
+</mat-menu>
+
+  </div>
+    </div>
+    <!-- </div> -->
+
+    
+<router-outlet></router-outlet>

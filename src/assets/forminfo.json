@@ -1,0 +1,392 @@
+[
+  {
+    "ATM": [
+      {
+        "fieldGroupClassName": "row",
+        "wrappers": ["my-wrapper2"],
+        "props": { "label": "ATM Request Form" },
+        "fieldGroup": [
+          {
+            "atribId": 101,
+            "atribIndex": 0,
+            "blockId": 101,
+            "key": "Terms",
+            "className": "col-12 mb-2",
+            "template": "<div>terms and condition</div>"
+          },
+          {
+            "atribId":102,
+            "atribIndex":1,
+            "blockId":101,
+            "className":"col-12",
+            "controlType":"input1",
+            "atribKey":"AgentName",
+            "propType":"text",
+            "label":"Agent Name2",
+            "template":"",
+            "props":{
+               "required":true
+            },
+            "validation":{
+               "messages":{
+                  "required":"* Please enter a value"
+               }
+            },
+            "options":[
+               
+            ]
+         },
+          {
+            "atribId":102,
+            "atribIndex":1,
+            "sdsdKey":"AgentName",
+            "blockId":101,
+            "className":"col-12",
+            "type":"input1",
+            
+            "options":[
+               
+            ],
+            "propType":"text",
+            "props":{
+             
+               "required":true
+            },
+           
+            "validation":{
+               "messages":{
+                  "required":"* Please enter a value"
+               }
+            }
+         },
+          {
+            "atribId": 102,
+            "atribIndex": 1,
+            "blockId": 101,
+            "className": "col-12",
+            "key": "Shahbaz",
+            "type": "input1",
+            "props": {"required": true},
+            "validation": {
+              "messages": {
+                "required": "* Please enter a value"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "fieldGroupClassName": "row",
+        "wrappers": ["body-wrapper"],
+        "props": { "label": "Lcoation Information" },
+        "fieldGroup": [
+          {
+            "atribId": 103,
+            "atribIndex": 0,
+            "blockId": 102,
+            "className": "col-12",
+            "key": "BusinessLeaglName",
+            "type": "input1",
+            "props": {
+              "type": "text",
+              "label": "Business legal name",
+              "options": [
+                { "value": "1", "label": "Sole prop" },
+                { "value": "2", "label": "Corp" },
+                { "value": "3", "label": "Partnership" }
+              ]
+            }
+          },
+          {
+            "atribId": 104,
+            "atribIndex": 1,
+            "blockId": 102,
+            "className": "col-12",
+            "key": "operatingName",
+            "type": "input1",
+            "props": {
+              "type": "text",
+              "label": "Operating name",
+              "options": [],"required": true
+            },
+            "validation": {
+              "messages": {
+                "required": "* Please enter a value"
+              }
+            }
+            
+          },
+          {
+            "atribId": 105,
+            "atribIndex": 2,
+            "blockId": 102,
+            "className": "col-12",
+            "key": "gender",
+            "type": "radio",
+            "props": {
+              "type": "text",
+              "label": "Business type (click one)",
+              "options": []
+            }
+          },
+          {
+            "atribId": 106,
+            "atribIndex": 3,
+            "blockId": 102,
+            "className": "col-12",
+            "key": "BusinessAddress",
+            "type": "input1",
+            "props": {
+              "type": "text",
+              "label": "Business Address",
+              "options": []
+            }
+          },
+          {
+            "atribId": 107,
+            "atribIndex": 4,
+            "blockId": 102,
+            "className": "col-4",
+            "key": "BusinessTel",
+            "type": "input1",
+            "props": { "type": "text", "label": "Business Tel", "options": [] }
+          },
+          {
+            "atribId": 108,
+            "atribIndex": 5,
+            "blockId": 102,
+            "className": "col-4",
+            "key": "Cell",
+            "type": "input1",
+            "props": { "type": "text", "label": "Cell", "options": [] }
+          },
+          {
+            "atribId": 109,
+            "atribIndex": 6,
+            "blockId": 102,
+            "className": "col-4",
+            "key": "Fax",
+            "type": "input1",
+            "props": { "type": "text", "label": "Fax", "options": [] }
+          },
+          {
+            "atribId": 110,
+            "atribIndex": 7,
+            "blockId": 102,
+            "className": "col-4",
+            "key": "Yearinbusiness",
+            "type": "input1",
+            "props": {
+              "type": "text",
+              "label": "Year in Business",
+              "options": []
+            }
+          },
+          {
+            "atribId": 111,
+            "atribIndex": 8,
+            "blockId": 102,
+            "className": "col-4",
+            "key": "TerminalId",
+            "type": "input1",
+            "props": { "type": "text", "label": "Terminal Id", "options": [] }
+          },
+          {
+            "atribId": 112,
+            "atribIndex": 9,
+            "blockId": 102,
+            "className": "col-4",
+            "key": "Date",
+            "type": "input1",
+            "props": { "type": "text", "label": "Date", "options": [] }
+          }
+        ]
+      },
+      {
+        "fieldGroupClassName": "row",
+        "wrappers": ["body-wrapper"],
+        "props": { "label": "POS Information" },
+        "fieldGroup": [
+          {
+            "atribId": 113,
+            "atribIndex": 0,
+            "blockId": 103,
+            "className": "col-6",
+            "key": "TerminalTypeRadio",
+            "type": "radio",
+            "props": {
+              "type": "text",
+              "label": "Terminal type (check one)",
+              "options": [
+                { "value": "dialUp", "label": "Dial up" },
+                { "value": "Ip", "label": "I.P" },
+                { "value": "Wireless", "label": "Wireless" }
+              ]
+            }
+          },
+          {
+            "atribId": 114,
+            "atribIndex": 1,
+            "blockId": 103,
+            "className": "col-6",
+            "key": "paln",
+            "type": "radio",
+            "props": {
+              "type": "text",
+              "label": "Plan (check one)",
+              "options": [
+                { "value": "A", "label": "A" },
+                { "value": "B", "label": "B" },
+                { "value": "C", "label": "C" }
+              ]
+            }
+          },
+          {
+            "atribId": 115,
+            "atribIndex": 2,
+            "blockId": 103,
+            "className": "col-4",
+            "key": "master",
+            "type": "input1",
+            "props": {
+              "type": "text",
+              "label": "Visa & master card request",
+              "options": []
+            }
+          },
+          {
+            "atribId": 116,
+            "atribIndex": 3,
+            "blockId": 103,
+            "className": "col-4",
+            "key": "Average",
+            "type": "input1",
+            "props": {
+              "type": "text",
+              "label": "Average ticket price",
+              "options": []
+            }
+          },
+          {
+            "atribId": 117,
+            "atribIndex": 4,
+            "blockId": 103,
+            "className": "col-4",
+            "key": "FaxPOs",
+            "type": "input1",
+            "props": { "type": "text", "label": "Fax", "options": [] }
+          },
+          {
+            "atribId": 118,
+            "atribIndex": 5,
+            "blockId": 103,
+            "className": "col-4",
+            "key": "Yearin",
+            "type": "input1",
+            "props": {
+              "type": "text",
+              "label": "Year in business",
+              "options": []
+            }
+          },
+          {
+            "atribId": 119,
+            "atribIndex": 6,
+            "blockId": 103,
+            "className": "col-4",
+            "key": "TerminalcODE",
+            "type": "input1",
+            "props": { "type": "text", "label": "Terminal Code", "options": [] }
+          },
+          {
+            "atribId": 120,
+            "atribIndex": 7,
+            "blockId": 103,
+            "className": "col-4",
+            "key": "DateOff",
+            "type": "input1",
+            "props": { "type": "text", "label": "Date", "options": [] }
+          }
+        ]
+      },
+      {
+        "fieldGroupClassName": "row",
+        "wrappers": ["body-wrapper"],
+        "props": { "label": "Client Information" },
+        "fieldGroup": [
+          {
+            "atribId": 121,
+            "atribIndex": 0,
+            "blockId": 104,
+            "className": "col-6",
+            "key": "legalFirstName",
+            "type": "input1",
+            "props": {
+              "type": "text",
+              "label": "Legal first name",
+              "options": []
+            }
+          },
+          {
+            "atribId": 122,
+            "atribIndex": 1,
+            "blockId": 104,
+            "className": "col-6",
+            "key": "LegalLastName",
+            "type": "input1",
+            "props": {
+              "type": "text",
+              "label": "Legal last name",
+              "options": []
+            }
+          },
+          {
+            "atribId": 123,
+            "atribIndex": 2,
+            "blockId": 104,
+            "className": "col-12",
+            "key": "homeAddress",
+            "type": "input1",
+            "props": { "type": "text", "label": "home address", "options": [] }
+          },
+          {
+            "atribId": 124,
+            "atribIndex": 3,
+            "blockId": 104,
+            "className": "col-6",
+            "key": "Hometel",
+            "type": "input1",
+            "props": { "type": "text", "label": "Home tel", "options": [] }
+          },
+          {
+            "atribId": 125,
+            "atribIndex": 4,
+            "blockId": 104,
+            "className": "col-6",
+            "key": "email",
+            "type": "input1",
+            "props": { "type": "text", "label": "Email", "options": [] }
+          },
+          {
+            "atribId": 126,
+            "atribIndex": 5,
+            "blockId": 104,
+            "className": "col-6",
+            "key": "bank",
+            "type": "input1",
+            "props": { "type": "text", "label": "Bank name", "options": [] }
+          },
+          {
+            "atribId": 127,
+            "atribIndex": 6,
+            "blockId": 104,
+            "className": "col-6",
+            "key": "account",
+            "type": "input1",
+            "props": { "type": "text", "label": "Account", "options": [] }
+          }
+        ]
+      }
+    ]
+  }
+]

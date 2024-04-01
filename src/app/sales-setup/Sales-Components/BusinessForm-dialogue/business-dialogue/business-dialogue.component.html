@@ -1,0 +1,17 @@
+<div mat-dialog-title class="title" >
+    {{businessName}}
+<div style="margin-left: auto;"><i [mat-dialog-close]="closemessage" class="bi bi-x-lg"></i></div>
+</div>
+<div mat-dialog-content class="MainContent">
+
+    <form [formGroup]="form" >
+        <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+      </form>
+
+      <div mat-dialog-actions align="end">
+        <!-- <button [mat-dialog-close]="closemessage" mat-raised-button>close</button> -->
+        <button [disabled]="!form.valid" style="width: 100%;" (click)="getBizzModel(model)" mat-raised-button>Add</button>
+        
+        </div>
+
+</div>

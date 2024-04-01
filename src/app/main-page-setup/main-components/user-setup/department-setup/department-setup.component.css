@@ -1,0 +1,46 @@
+.allCheckbox{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btmBtn{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5px 5px 0px 5px;
+  }
+
+  .btmBtn button{
+    max-width: 50px;
+    min-width:25px;
+    height: 30px;
+    font-size: 12px;
+    }
+
+  .editTextfield{
+    width:100%;
+    min-height: 20px;
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .parent{
+border: 1px solid #ccc;
+padding: 15px;
+margin: auto;
+position: relative;
+  }
+
+  .AssignBusiines{
+    color: #727577;
+    padding: 1px;
+    position: absolute;
+    top: -10px;
+    background-color:white;
+  }
+
+  mat-label{
+    font-size: 12px;
+  }

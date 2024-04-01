@@ -1,0 +1,181 @@
+<div class="container-fluid">
+  
+    <!-- <div class="Pagename" style="margin: 10px 0px;">
+        <div style="padding: 4px;font-size: 22px; 
+        font-weight: 500;"><i class="bi bi-ticket-perforated"></i> Client Tickets</div>
+      </div> -->
+    
+    
+    <mat-card style="margin: 0px 20px;">
+        <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          margin:0px 10px
+        "
+      >
+      <div style="display: flex;padding: 12px;">
+        <div style="font-weight: 600;font-size: 18px;"> Client Tickets</div>
+        <div
+          style="
+            font-size: 10px;
+            background-color: #f1f5f8;
+            color: rgb(98, 98, 240);
+            border-radius: 10px;
+            padding: 1px 8px;
+            margin-left: 5px
+          "
+        >
+        <i class="bi bi-record-fill"></i>
+          <span style="margin-left: 1px; font-size: 10px">
+         {{CUstomerList.length}}
+          
+          </span>
+        </div>
+      </div>
+       
+      
+    
+        <div class="editTextfield">
+            <input  (keyup)="Filterchange($event)" type="text" placeholder="Search here...">
+            <div  class="searchbtn">
+              <i  class="bi bi-search"></i> 
+            </div>
+    
+            <mat-select [(ngModel)]="filterStatus" (selectionChange)="changeStatus($event)"  required placeholder="Filter by Status">
+                @for (item of statusList; track item) {
+                    <mat-option   [value]="item"> {{item}}</mat-option>
+                  }
+              </mat-select>
+              <mat-select [(ngModel)]="filterBiz" (selectionChange)="changeBusiness($event)" required placeholder="Filter by Business">
+                @for (item of businessList; track item) {
+                    <mat-option   [value]="item"> {{item}}</mat-option>
+                  }
+               
+              </mat-select>
+              <mat-select [(ngModel)]="filterAgent" (selectionChange)="changeAgent($event)"  required placeholder="Filter by Agent">
+                @for (item of AgentList; track item) {
+                    <mat-option  [value]="item"> {{item}}</mat-option>
+                  }
+              </mat-select>
+    
+        </div>
+        <button (click)="clearAllFilter()" matTooltip="Clear all filters" matTooltipPosition="left" mat-raised-button><i class="bi bi-arrow-clockwise"></i> </button>
+      </div>
+       
+     <mat-card-content class="cardone">
+
+        @if(CUstomerList.length > 0){
+            <table matSort mat-table [dataSource]="dataSource" class="mat-elevation-z8 Step2Table">  
+
+         
+                <!--  for sorting mat-sort-header -->
+                <ng-container matColumnDef="personName">
+                  <th mat-sort-header mat-header-cell *matHeaderCellDef> Person </th>
+                  <td mat-cell *matCellDef="let element"> <span style="font-weight: 500;">{{element.personName}}</span> </td>
+                </ng-container>
+      
+              <!--  for sorting mat-sort-header -->
+              <ng-container matColumnDef="companyName">
+                <th mat-header-cell *matHeaderCellDef> Company </th>
+                <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+              </ng-container>
+            
+              <!--  Column -->
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+              </ng-container>
+               <!--  Column -->
+               <ng-container matColumnDef="mobile">
+                  <th mat-header-cell *matHeaderCellDef>Contact</th>
+                  <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+                </ng-container>
+            
+              <!-- Column -->
+              <ng-container matColumnDef="createdByName">
+                <th mat-header-cell *matHeaderCellDef> Created by </th>
+                <td mat-cell *matCellDef="let element"> {{element.createdByName}} </td>
+              </ng-container>
+            
+              <!-- Column -->
+              <ng-container matColumnDef="businessName">
+                <th mat-header-cell *matHeaderCellDef> Business </th>
+                <td mat-cell *matCellDef="let element"> {{element.businessName}} </td>
+              </ng-container>
+                <!-- Column -->
+                <ng-container matColumnDef="createdAt">
+                  <th mat-header-cell *matHeaderCellDef> Created </th>
+                  <td mat-cell *matCellDef="let element"> {{element.createdAt | date}} </td>
+                </ng-container>
+  
+                  <!-- Column -->
+                  <ng-container matColumnDef="agentRemarks">
+                      <th mat-header-cell *matHeaderCellDef> Agent Remarks </th>
+                      <td mat-cell *matCellDef="let element">
+                          @if(element.agentRemarks){
+                              <span>{{element.agentRemarks}}</span>
+                          }@else{
+                              <span style="color: red;">no remarks</span>
+                          } 
+                        </td>
+                    </ng-container>
+  
+                      <!-- Column -->
+                <ng-container matColumnDef="coordinatorRemarks">
+                  <th mat-header-cell *matHeaderCellDef> Coordinator Remarks </th>
+                  <td mat-cell *matCellDef="let element"> 
+                      @if(element.coordinatorRemarks){
+                          <span>{{element.coordinatorRemarks}}</span>
+                      }@else{
+                          <span style="color: red;">no remarks</span>
+                      } </td>
+                </ng-container>
+                  <!-- Column -->
+              <ng-container matColumnDef="statusName">
+                  <th mat-header-cell *matHeaderCellDef> Status </th>
+                  <td mat-cell *matCellDef="let element" ><div style=" display: flex;justify-content: center;align-items: center;"><span style="border-radius: 15px;font-weight: 500;font-size:8px;padding: 2px 15px" [style]="getPromoStyles(element.statusName)"><i style="padding-right: 3px;" class="bi bi-record-fill"></i> {{element.statusName | slice:6}} </span></div> </td>
+                  
+                </ng-container>
+          
+              <!-- Action tab -->
+              <ng-container matColumnDef="Action">
+                  <th mat-header-cell *matHeaderCellDef> <i class="bi bi-three-dots-vertical"></i> </th>
+                  <td mat-cell *matCellDef="let element">
+                      <i (click)="Openpopup(element)" matTooltip="View ticket detail" matTooltipPosition="left" style="cursor: pointer;font-size: 12px;" class="bi bi-eye"></i> 
+                  </td>
+                </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        }@else{
+            <div class="item">
+                <ngx-skeleton-loader count="10" appearance="line" />
+              </div>
+        }
+       
+      
+   
+
+     </mat-card-content>
+    <br>
+    <mat-card-footer>
+    <mat-paginator [pageSizeOptions]="[10,15,20,50]" showFirstLastButtons></mat-paginator>
+    </mat-card-footer>
+
+   
+    
+    </mat-card>
+  
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    

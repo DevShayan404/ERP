@@ -1,0 +1,70 @@
+<div class="shadow">
+  <div
+  fxFlex="row"
+  fxLayoutAlign="space-between center"
+  fxLayoutGap="10px"
+  class="header"
+>
+ 
+
+<div>
+<!-- <span>
+  <img
+  class="logo"
+  src="assets/motorlogo.png"
+  alt=""
+/>
+</span> -->
+<button mat-icon-button (click)="sidenav.toggle()">
+  <mat-icon>menu</mat-icon>
+</button>
+
+<div class="vl"></div>
+
+  <span class="navName" (click)="backToMain()"><span style="font-size: 35px;">M</span>BE ERP</span>
+  <span class="spacer"></span>
+ 
+
+</div>
+
+
+<div class="profile">
+  <div class="matICon" style="display: flex;gap: 15px; margin-right: 30px;">
+    <mat-icon aria-hidden="false" matBadge="1" matBadgeColor="warn" matBadgeSize="small">outlined_flag</mat-icon>
+    <mat-icon aria-hidden="false" matBadge="7" matBadgeColor="warn" matBadgeSize="small"> mail_outline</mat-icon>
+    <mat-icon aria-hidden="false" matBadge="2" matBadgeColor="warn" matBadgeSize="small">notifications_none</mat-icon>
+  </div>
+
+ <img
+ [matMenuTriggerFor]="menu"
+    height="35" width="35"
+    src="assets/user.png"
+  />
+  <span style="    color: #812682;
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 500">{{userName}}</span>
+</div>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item disabled="true">
+    <mat-icon>person</mat-icon>
+    <span>Profile</span>
+  </button>
+  <button  mat-menu-item disabled="true" > 
+    <mat-icon>manage_accounts</mat-icon>
+    <span>Manage Account</span>
+  </button>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon >logout</mat-icon>
+    <span>logout</span>
+  </button>
+</mat-menu>
+
+
+</div>
+</div>
+
+
+
+
+

@@ -1,0 +1,53 @@
+
+<mat-tab-group (selectedTabChange)="TabGroup($event)"  mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab  *ngFor="let tab of StatusList; let index = index" [label]="tab.status" (click)="GetBizIdFromTab(tab.status)" >
+
+<div class="main">
+<mat-card class="remarksBox" *ngFor="let item of showRemarks">
+
+    <div class="RemarkHeader">
+<div class="avatarset">
+    <span>
+        <img src="assets/agent.png" alt="Avatar" class="avatar">
+    </span>
+    <span style="margin-left: 5px;">{{item.status}}</span>
+</div>
+<div style="font-weight: 400;font-size: 10px;">{{item.date | date}}</div>
+    </div>
+
+   <div class="remarksMain"> 
+    <div class="RemarkContent">
+  {{item.remarks}}
+    </div>
+    <i matTooltip="download file" class="downloadIcon"  class="bi bi-cloud-download"></i>
+</div>
+</mat-card>
+</div>
+
+</mat-tab>
+</mat-tab-group>
+
+<div class="ShowRemarkButton">
+    <button mat-raised-button>Enter Remarks</button>
+
+    <div style="display: flex; align-items: center;gap: 5px;">
+        <input type="file" accept="image/*">
+        <mat-form-field class="form-field">
+            <!-- <mat-label>Select type</mat-label> -->
+            <mat-select placeholder="select type">
+              <mat-option *ngFor="let val of StatusList" [value]="val.status">
+                {{val.status}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    
+</div>
+
+    <form [formGroup]="form">
+        <textarea style="height: 100px;width: 100%;padding: 15px;" formControlName="html" placeholder="Enter your remarks..."></textarea>
+      </form>
+
+      <div style="display: flex;justify-content: flex-end;">
+        <button (click)="sendRemark()" mat-raised-button><i class="bi bi-send"></i> Send Attachments</button>
+      </div>

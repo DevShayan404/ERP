@@ -1,0 +1,132 @@
+
+
+<div class="topbtn">
+  <button (click)="ShowNewLead()" mat-raised-button>New</button>
+  <button mat-raised-button>Generate leads</button>
+</div>
+
+<div class="container-fluid mt-2">
+<div class="row justify-content-start">
+<div class="col-lg-3 col-md-4 col-sm-6">
+<!-- //-- header -->
+<div class="box-header">
+<button *ngIf="ShowLead" mat-button color="primary">New lead</button>
+<button *ngIf="!ShowLead" mat-button color="primary">All lead</button>
+<i *ngIf="ShowLead == false" (click)="ShowNewLead()" class="addIcon"  class="bi bi-plus"></i>
+<i *ngIf="ShowLead == true" (click)="GetLead()" class="addIcon" class="bi bi-arrow-clockwise"></i>
+</div>
+<!-- //-- nbody -->
+
+<!-- //-- Get leads start -->
+<div *ngIf="!ShowLead">
+<div  *ngFor="let lead of leadData">
+  <mat-card style="margin-top: 5px; border-left: 2px solid rgb(152, 151, 151);">
+    <mat-card-content class="Getmat-card-content">
+      <mat-card-header >
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title style="font-size: 14px;">{{lead.companyName}}</mat-card-title>
+        <mat-card-subtitle style="font-size: 10px;">{{lead.personName}}</mat-card-subtitle>
+      </mat-card-header>
+
+      </mat-card-content>
+      </mat-card>
+</div>
+</div>
+<!-- //-- Get leads end -->
+
+<!-- //-- Add lead start -->
+<div *ngIf="ShowLead">
+  <mat-card class="cardone">
+    <mat-card-content class="Insertmat-card-content">
+      <form [formGroup]="leadForm">
+      <div>
+      <mat-form-field class="form-field">
+        <mat-label>Organization</mat-label>
+        <input matInput type="text" formControlName="companyName">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="form-field">
+        <mat-label>Person Name</mat-label>
+        <input matInput type="text" formControlName="personName">
+      </mat-form-field>
+    </div>
+ 
+      <div class="example-container">
+        <mat-form-field class="form-field-email">
+          <mat-label>Enter your email</mat-label>
+          <input matInput  formControlName="email"  required >
+          <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field class="form-field">
+          <mat-label>Phone</mat-label>
+          <input matInput type="number" formControlName="mobile" onkeydown="return event.keyCode !== 69">
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field class="form-field" floatLabel="always">
+          <mat-label>Expected revenue</mat-label>
+          <input matInput type="number" formControlName="expectedRevenue" onkeydown="return event.keyCode !== 69" class="example-right-align" placeholder="0">
+          <span matTextPrefix>$&nbsp;</span>
+          <!-- <span matTextSuffix>.00</span> -->
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="form-field">
+          <mat-label>Select business</mat-label>
+        <mat-select  formControlName="businessId" required>
+          <mat-option *ngFor="let list of BusinessList" [value]="list.businessId">
+            {{list.business}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+      
+    <!-- <div formArrayName="followups" *ngFor="let frmCtrl of FrmArr.controls; index as i" >
+      <div [formGroupName]="i">
+        <div>
+          <mat-form-field class="form-field">
+            <mat-label>Select Status</mat-label>
+          <mat-select  formControlName="leadStatusId" required>
+            <mat-option *ngFor="let list of StatusList" [value]="list.leadStatusId">
+              {{list.leadStatus}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+  
+        <div>
+          <mat-form-field class="form-field">
+              <mat-label>Next Followup Date</mat-label>
+              <input formControlName="followupDate" name="Resetcreatedto" matInput [matDatepicker]="picker2" >
+              <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>   
+      </div>
+  
+      <div>
+        <mat-form-field class="Remarks">
+          <mat-label>Remarks</mat-label>
+          <textarea formControlName="remarks" matInput ></textarea>
+        </mat-form-field>
+      </div>
+  </div>
+  </div> -->
+   
+      <div class="btmBtn">
+        <button style="width: 100%;" [disabled]="!leadForm.valid" (click)="AddLead()" mat-raised-button color="primary">Add</button>
+    </div>
+    
+   </form>
+   </mat-card-content>
+  </mat-card>
+</div>
+</div>
+
+</div>
+</div>

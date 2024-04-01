@@ -1,0 +1,11 @@
+
+<div class="body">
+    <div *ngFor="let item of AllStages " class="tab-parent">
+        <div style="z-index: 1;" *ngIf="item?.bizStageName == 'Tickets'" [matBadge]="AllTickets?.length" matBadgeOverlap="true"></div>
+        <mat-card  class="tab" (click)="redirectToDashboard(item)">   
+            <img [src]="item?.logoUrl" />
+        </mat-card>    
+            <div class="BusinessName">{{item?.bizStageName}}</div>
+    </div>
+  
+</div>

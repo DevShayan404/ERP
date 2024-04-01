@@ -1,0 +1,102 @@
+<div mat-dialog-title class="title">
+    <div style="margin-left: auto">
+      <i mat-dialog-close class="bi bi-x-lg"></i>
+    </div>
+  </div>
+<div mat-dialog-content class="MainContent">
+    <div class="container-fluid">
+        <div
+        class="d-flex justify-content-center"
+        style=" height: 86vh;overflow-x: hidden;"
+      >
+      <mat-card style="padding: 15px;height: 86vh;width: 50%; overflow: auto;">
+        <mat-card-title class="child-card-title">
+            <div class="main-header">
+       
+                <div class="box">
+                    @if(channelLogo){
+                        <div>
+                            <img  height="65px" width="65px" [src]="channelLogo"  alt="logo">
+                        </div>
+    
+  }
+                </div>
+                <div class="box">{{bizname}} PROPOSAL OVERVIEW</div>
+                <!-- <div class="box">dd</div> -->
+                <div class="box">
+                    @if(processorLogo){
+                        <img height="65px" width="65px" [src]="processorLogo" alt="logo">
+                    }
+                </div>
+            </div>
+            <div style="display: flex;justify-content: space-between;padding: 0px 5px;
+            font-size: 10px;
+            line-height: 15px;
+            color: #767676;">
+  <span>{{channelname | uppercase}}</span>
+  <span>{{processorname | uppercase}}</span>
+            </div>
+        </mat-card-title>
+        <mat-card-content style="margin-top: 10px;padding: 0px;">
+  @if(EntityArray?.length == 0){
+  <div style="margin-top: 50px;">
+    <img src="/assets/nocheck1.png" class="img-fluid" alt="...">
+  </div>
+  
+  }
+  
+  <!-- //Product -->
+  @if(EntityArray?.length > 0){
+  <div>
+
+      <mat-card style="max-height: 50vh; overflow: auto;  ">
+        <table class="table table-response Step2Table" style="margin-bottom: 0px;">
+          <thead class="thead">
+            <tr>
+              <th>Entity type</th>
+              <th>Entity Name</th>
+              <th>Type</th>
+              <th>amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of EntityArray;let i = $index; track
+            item.setupEntityId) {
+            <tr>
+                <td>{{ item.entityType }}</td>
+                <td>{{ item.entityName }}</td>
+                <td>{{ item.paymentType }}</td>
+                <td>{{ item.finalAmount | currency }}</td>
+              </tr>
+      
+           
+        }
+          </tbody>
+        </table>
+      </mat-card>
+    </div>
+  
+  }
+  
+        </mat-card-content>
+    
+        @if(EntityArray?.length != 0){
+          <div style=" margin-top: auto; padding-top: 10px;">
+            @if(proposalObject?.statusId == 108){
+              <button (click)="sendproposal()" style="width: 100%;" mat-raised-button><i class="bi bi-send-check"></i> Send proposal</button>
+            }@else if(proposalObject?.statusId == 109){
+              <button (click)="sendproposal()" style="width: 100%;background-color: #3b0063;color: white;" mat-raised-button><i class="bi bi-send-check"></i> Proposal sent</button>
+            }@else if(proposalObject?.statusId == 110){
+              <button   style="width: 100%;background-color: #A3B763;;color: white" mat-raised-button><i class="bi bi-check2-all"></i> Proposal Accepted</button>
+            }@else if(proposalObject?.statusId == 111){
+              <button  style="width: 100%;background-color: #860A35;color: white;" mat-raised-button><i class="bi bi-ban"></i> Proposal Declined</button>
+            }
+          </div>
+      }
+    </mat-card>
+
+    </div>
+        </div>
+        </div>
+
+

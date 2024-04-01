@@ -1,0 +1,12 @@
+/* .MainContent{
+    height: 300px;
+    margin-top: 10px;
+    } */
+
+    .title{
+        padding: 20px 20px 0px 20px;
+        display: flex;
+        color: black;
+        /* justify-content: space-between; */
+        align-items: center;
+    }

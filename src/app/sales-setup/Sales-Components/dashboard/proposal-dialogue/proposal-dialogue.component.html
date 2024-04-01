@@ -1,0 +1,495 @@
+<div mat-dialog-title class="title">
+    <!-- {{ data.title }} -->
+    <div style="margin-left: auto">
+      <i mat-dialog-close class="bi bi-x-lg"></i>
+    </div>
+  </div>
+  <div mat-dialog-content class="MainContent">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- //Proposal Setup table -->
+        <div [ngClass]="showOverview ? 'col-8' : 'col-12'"
+          
+          style=" height: 86vh; padding-left: 0px;
+          padding-right: 0px"
+        >
+          <mat-card style="padding: 15px;height: 86vh; overflow: auto;">
+            <mat-card-title class="child-card-title">
+              <div class="heading">
+                <div><i class="bi bi-person-vcard"></i> Proposal preparation</div>
+                <div class="headingChild">
+                  Once created proposal will not be editable
+                </div>
+              </div>
+            </mat-card-title>
+            <mat-card-content style="margin-top: 10px">
+              <div style="display: flex; gap: 5px">
+                <mat-form-field
+                  style="width: 100%; max-height: 70px; font-size: 12px"
+                >
+                  <mat-label style="font-size: 12px">SELLING CHANNEL</mat-label>
+                  <mat-select
+                    style="font-size: 12px"
+                    [(ngModel)]="channel"
+                    (selectionChange)="changeChannel($event)"
+                    required
+                  >
+                    @for (item of AllChannel; track item) {
+                    <mat-option style="font-size: 12px" [value]="item">
+                      {{ item.channelName }}</mat-option
+                    >
+                    }
+                  </mat-select>
+                </mat-form-field>
+  
+                <mat-form-field
+                  style="width: 100%; max-height: 70px; font-size: 12px"
+                >
+                  <mat-label style="font-size: 12px"
+                    >THIRD PARTY PROCESSOR</mat-label
+                  >
+                  <mat-select
+                    style="font-size: 12px"
+                    [(ngModel)]="processor"
+                    (selectionChange)="changeprocessor($event)"
+                    required
+                  >
+                    @for (item of AllProcessor; track item) {
+                    <mat-option style="font-size: 12px" [value]="item">
+                      {{ item.processorName}}</mat-option
+                    >
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+  
+                <div>
+                    <div
+                      style="
+                        padding: 8px 4px;
+                        line-height: 14px;
+                        background-color: #f1f3ff;
+                      border: 1px solid #d1d9ff;
+                      margin-top: 5px;
+                         margin-bottom: 10px;
+                      "
+                    >
+                      <div
+                        style="
+                          font-size: 14px;
+                          font-weight: 500;
+                          color: rgba(0, 0, 0, 0.6);
+                        "
+                      >
+                        Entity Records
+                      </div>
+                      <div
+                        style="
+                          font-size: 10px;
+                          font-weight: 400;
+                          color: rgb(116, 116, 116);
+                        "
+                      >
+                        Min & max can be set by clicking on checkbox
+                      </div>
+                    </div>
+                  <div (click)="AllProduct('Product')"  class="tableNameStep2" [ngClass]="{ activeStyle: TSindex === 'Product' }">
+                      <span >
+                          Product
+                          <span
+                            style="
+                              background-color: white;
+                              padding: 2px 9px;
+                              color: black;
+                              font-size: 10px;
+                              border-radius: 4px;
+                              position: relative;
+                              bottom: 2px;
+                            "
+                            >{{ productArray?.length }}</span
+                          >
+                      </span>
+                 
+                  </div>
+                  <div
+                    (click)="AllService('Service')"
+                    class="tableNameStep2"
+                    style="margin-left: 5px"
+                    [ngClass]="{ activeStyle: TSindex === 'Service' }"
+                  >
+                  <span >
+                    Service
+                    <span
+                      style="
+                        background-color: white;
+                        padding: 2px 9px;
+                        color: black;
+                        font-size: 10px;
+                        border-radius: 4px;
+                        position: relative;
+                        bottom: 2px;
+                      "
+                      >{{ serviceArray?.length }}</span
+                    >
+                  </span>
+                  </div>
+                  <div
+                    (click)="AllExtra('Extra')"
+                    class="tableNameStep2"
+                    style="margin-left: 5px"
+                    [ngClass]="{ activeStyle: TSindex === 'Extra' }"
+                  >
+                  <span >
+                    Extra
+                    <span
+                      style="
+                        background-color: white;
+                        padding: 2px 9px;
+                        color: black;
+                        font-size: 10px;
+                        border-radius: 4px;
+                        position: relative;
+                        bottom: 2px;
+                      "
+                      >{{ extraArray?.length }}</span
+                    >
+                  </span>
+                  </div>
+                  <mat-card class="TableCard">
+                    <table class="table table-response Step2Table">
+                      <thead class="thead">
+                        <tr class="clientTableHead">
+                          <th>Entity type</th>
+                          <th>Entity name</th>
+  
+                          @if(ShowhideColumn == 'Product'){
+                          <th>Amount type</th>
+                          <th>Type value</th>
+                          }@else{
+                          <th>Monthly fee</th>
+                          }
+  
+                          <th><i class="bi bi-gear"></i></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (item of AllEntityRecord;let i = $index; track
+                        item.id) {
+                        <tr class="clientTableRow">
+                          <td style="font-weight: 500; color: rgb(11, 0, 70)">
+                            {{ item.entityType }}
+                          </td>
+                          <td>{{ item.entityName }}</td>
+                          @if(ShowhideColumn == 'Product'){
+                          <td style="width: 10%">
+                            <div class="editTextfield">
+                              <mat-select
+                              [disabled]="item.checked"
+                                [(value)]="item.selectedValue"
+                                style="font-size: 10px"
+                                (selectionChange)="changeAmount($event ,item)"
+                                placeholder="Select type"
+                                required
+                              >
+                                @for (type of EntityTypelist; track type) {
+                                <mat-option
+                                  style="font-size: 10px; margin-bottom: 3px"
+                                  [value]="type.id"
+                                >
+                                  {{ type.value }}</mat-option
+                                >
+                                }
+                              </mat-select>
+                            </div>
+                          </td>
+                          <td>
+                       
+                            @if(item.minmax == 'Purchase' ){
+                            <div class="input-group">
+                              <button mat-stroked-button>
+                             Min({{ item.purchasingAmountMin }})
+                              </button>
+                              <input
+                              [disabled]="item.checked"
+                                type="number"
+                                class="form-control"
+                                [min]="item.purchasingAmountMin"
+                                [max]="item.purchasingAmountMax"
+                                required
+                                placeholder="Enter value..."
+                                [(ngModel)]="item.finalAmount"
+                                (change)="limitInputValue(item , 'purchase')"
+                                name="rateInput"
+                              />
+                              <button mat-stroked-button color="primary">
+                                max({{ item.purchasingAmountMax }})
+                              </button>
+                            </div>
+                            }
+                            @if(item.minmax == 'Rental'){
+                              <div class="input-group">
+                                  <button mat-stroked-button color="primary">
+                                    min({{ item.rentalFeeMin }})
+                                  </button>
+                                  <input
+                                  [disabled]="item.checked"
+                                    type="number"
+                                    class="form-control"
+                                    [min]="item.rentalFeeMin"
+                                    [max]="item.rentalFeeMax"
+                                    required
+                                    placeholder="Enter value..."
+                                    [(ngModel)]="item.finalAmount"
+                                    (change)="limitInputValue(item , 'rental')"
+                                    name="rateInput"
+                                  />
+                                  <button mat-stroked-button color="primary">
+                                    max({{ item.rentalFeeMax}})
+                                  </button>
+                                </div>
+                            }
+                          </td>
+                          } @if(ShowhideColumn == 'Service'){
+                          <td style="width: 40%;">
+                            <div class="input-group">
+                              <button mat-stroked-button color="primary">
+                                min({{ item.monthlyFeeMin }})
+                              </button>
+                              <input
+                                type="number"
+                                [disabled]="item.checked"
+                                class="form-control"
+                                [min]="item.monthlyFeeMin"
+                                [max]="item.monthlyFeeMax"
+                                required
+                                placeholder="Enter value..."
+                                [(ngModel)]="item.finalAmount"
+                                (change)="limitInputValue(item , 'service')"
+                                name="rateInput"
+                              />
+                              <button mat-stroked-button color="primary">
+                                max({{ item.monthlyFeeMax}})
+                              </button>
+                            </div>
+                          </td>
+                          } @if(ShowhideColumn == 'Extra'){
+                          <td style="width: 40%;">
+                              <div class="input-group">
+                                  <button mat-stroked-button color="primary">
+                                    min({{ item.monthlyExtraFeeMin }})
+                                  </button>
+                                  <input
+                                    type="number"
+                                    [disabled]="item.checked"
+                                    class="form-control"
+                                    [min]="item.monthlyExtraFeeMin"
+                                    [max]="item.monthlyExtraFeeMax"
+                                    required
+                                    placeholder="Enter value..."
+                                    [(ngModel)]="item.finalAmount"
+                                    (change)="limitInputValue(item , 'extra')"
+                                    name="rateInput"
+                                  />
+                                  <button mat-stroked-button color="primary">
+                                    max({{ item.monthlyExtraFeeMax}})
+                                  </button>
+                                </div>
+                    
+                          </td>
+                          }
+                          <td style="width: 10%;">
+                              <div [matTooltip]="!item.finalAmount?'Enter amount to enable check':''" matTooltipPosition="left">
+                                  <mat-checkbox [disabled]="!item.finalAmount" [(ngModel)]="item.checked" (click)="GetChekedValue($event, item)" color="primary" class="my-checkbox"></mat-checkbox>
+                              </div>
+                            
+                          </td>
+                        </tr>
+  
+                        } @empty {
+                        <li>There are no Data.</li>
+                        }
+                      </tbody>
+                    </table>
+                  </mat-card>
+                </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <!-- // Proposal overview -->
+        @if(showOverview){
+        <div
+          class="col-lg-4 col-md-4 col-sm-12"
+          style=" height: 86vh;overflow-x: hidden;"
+        >
+         
+        <mat-card [@slideInRightOnEnter] style="padding: 15px;height: 86vh; overflow: auto;">
+              <mat-card-title class="child-card-title">
+                  <div class="main-header">
+             
+                      <div class="box">
+                          @if(channelLogo){
+                              <div>
+                                  <img  height="65px" width="65px" [src]="channelLogo?channelLogo: alter"  alt="logo">
+                              </div>
+          
+      }
+                      </div>
+                      <div class="box">{{businessName}} PROPOSAL OVERVIEW</div>
+                      <!-- <div class="box">dd</div> -->
+                      <div class="box">
+                          @if(processorLogo){
+                              <img height="65px" width="65px" [src]="processorLogo?processorLogo: alter" alt="logo">
+                          }
+                      </div>
+                  </div>
+                  <div style="display: flex;justify-content: space-between;padding: 0px 5px; margin-top: 10px;
+                  font-size: 9px;
+                  line-height: 15px;
+                  color: #673ab7;">
+                   @if(channelLogo){
+                    <span><span style="font-size: 11px;color: black;font-weight: 500;">Channel:</span> {{channelname | uppercase}}</span>
+                   }
+                   @if(processorLogo){
+                    <span><span style="font-size: 11px;color: black;font-weight: 500;">Processor:</span> {{processorname | uppercase}}</span>
+                   }
+                  </div>
+                  <hr style="color: #673ab7;">
+              </mat-card-title>
+              <mat-card-content style="margin-top: 10px;padding: 0px;">
+      @if(EntityArray.length == 0){
+        <div style="margin-top: 50px;">
+          <img src="/assets/nocheck1.png" class="img-fluid" alt="...">
+        </div>
+       
+      }
+  
+      <!-- //Product -->
+      @if(hasProduct()){
+        <div [@bounceInLeftOnEnter] [@fadeOutLeftOnLeave]>
+          <div class="tableNameStep2">
+              Product
+            </div>
+            <mat-card style="max-height: 50vh; overflow: auto;  ">
+              <table class="table table-response Step2Table" style="margin-bottom: 0px;">
+                <thead class="thead">
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (item of EntityArray;let i = $index; track
+                  item.id) {
+      
+               @if(item.entityType === 'Product'){
+                  <tr>
+                      <td>{{ item.entityName }}</td>
+                      <td>{{ item.paymentType }}</td>
+                      <td>{{ item.finalAmount | currency }}</td>
+                    </tr>
+               }
+                 
+              }
+                </tbody>
+              </table>
+            </mat-card>
+          </div>
+     
+      }
+      
+      <!-- Service -->
+      @if(hasService()){
+      <div [@bounceInLeftOnEnter] [@fadeOutLeftOnLeave] style="margin-top: 8px;">
+      <div class="tableNameStep2">
+          Service
+        </div>
+        <mat-card style="max-height: 50vh; overflow: auto;  ">
+          <table class="table table-response Step2Table" style="margin-bottom: 0px;">
+            <thead class="thead">
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of EntityArray;let i = $index; track
+              item.id) {
+      
+           @if(item.entityType === 'Service'){
+              <tr>
+                  <td>{{ item.entityName }}</td>
+                  <td>{{ item.paymentType }}</td>
+                  <td>{{ item.finalAmount | currency }}</td>
+                </tr>
+           }
+             
+          }
+            </tbody>
+          </table>
+        </mat-card>
+      </div>
+    }
+      
+      <!-- Extra -->
+      @if(hasExtra()){
+      <div [@bounceInLeftOnEnter] [@fadeOutLeftOnLeave] style="margin-top: 8px;">
+      <div class="tableNameStep2">
+          Extra
+        </div>
+        <mat-card style="max-height: 50vh; overflow: auto;  ">
+          <table class="table table-response Step2Table" style="margin-bottom: 0px;">
+            <thead class="thead">
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of EntityArray;let i = $index; track
+              item.id) {
+      
+           @if(item.entityType === 'Extra'){
+              <tr>
+                  <td>{{ item.entityName }}</td>
+                  <td>{{ item.paymentType }}</td>
+                  <td>{{ item.finalAmount | currency }}</td>
+                </tr>
+           }
+             
+          }
+            </tbody>
+          </table>
+        </mat-card>
+      </div>
+    }
+
+   
+
+  
+        
+      
+              </mat-card-content>
+          
+              @if(EntityArray.length != 0){
+                <div style=" margin-top: auto; padding-top: 10px;">
+                    <button (click)="PostProposal()" style="width: 100%;" mat-raised-button><i class="bi bi-cloud-download"></i> Save proposal</button>
+                </div>
+            }
+          </mat-card>
+      </div>
+        }
+  
+      </div>
+    </div>
+  </div>
+  
+  <!-- <div mat-dialog-actions align="end">
+      <button [mat-dialog-close] mat-raised-button>close</button>
+      <button style="width: 100%;"  mat-raised-button>save data</button>
+      
+      </div>
+       -->
+  

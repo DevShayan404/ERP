@@ -1,0 +1,88 @@
+.main-card{
+    padding: 15px;
+}
+.main-card-title {
+    flex: 1; /* This makes the title take up the remaining space on the left */
+    text-align: left;
+    font-size: 16px; /* Adjust font size as needed */
+    font-weight: 500; /* Adjust font weight as needed */
+    color: rgb(56, 54, 54);
+  }
+
+  .child-card{
+    padding: 15px;
+  }
+  .child-card-title{
+    flex: 1; 
+    text-align: left;
+    font-size: 14px; /* Adjust font size as needed */
+    font-weight: 500; /* Adjust font weight as needed */
+    color: rgb(56, 54, 54);
+  }
+
+  .heading{
+    /* border: 1px solid yellow; */
+    line-height: 15px;
+  }
+  .headingChild{
+    /* border: 1px solid; */
+    color: #818181;
+    font-size: 10px;
+    font-weight: 400;
+    margin-left: 18px;
+  }
+
+
+
+
+  /* ///////////////INPUT FIELD/////////// */
+  .border-bottom-input {
+    width: 65%;
+    color: #818181;
+    border: none;
+    border-bottom: 1px solid #000; /* Set the initial border color */
+    outline: none; /* Remove the default focus outline */
+    transition: border-color 0.9s; /* Add a transition to the border color change */
+}
+
+.border-bottom-input:focus {
+    border-bottom: 2px solid rgb(169, 48, 169); 
+    color: black;
+}
+
+.BasicInfo-label{
+text-wrap:nowrap;
+}
+
+.inputLabelMain{
+    display: flex;
+    justify-content: space-between; 
+}
+
+
+mat-form-field mat-select{
+  font-size: 12px;
+}
+
+::ng-deep mat-form-field {
+  height: 40px;
+  width: 160px;
+}
+
+::ng-deep .mat-mdc-form-field-infix{
+  padding-top: 8px!important;
+}
+
+
+/* :host ::ng-deep .mat-tab-label-active {
+    border-width: 9px;
+    border-style: solid;
+    border-color: orange;
+  }
+
+
+  .my-custom-class {
+    border-width: 9px;
+    border-style: solid;
+    border-color: red;
+  } */
